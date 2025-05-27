@@ -1,7 +1,10 @@
 # A simple Git MCP server based on [mcp-server-git](https://pypi.org/project/mcp-server-git) , adapted to run over SSE protocol
 
+## Prerequisites
+- `pip install uv`
+
 ## Usage
-- Run it with `./server.sh` , it will handle installation and such, adjust port if needed
+- Run it with `./server.sh` , it will handle installation and server startup, adjust port if needed
 
 ## Prompting 
 - When using Git MCP over SSE, dont forget to include this in your AI assistant system prompt:
