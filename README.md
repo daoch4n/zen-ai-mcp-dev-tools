@@ -337,7 +337,7 @@ This MCP server provides the following Git-related tools:
   ```
 
 ### `write_to_file`
-- **Description:** Writes content to a specified file, creating it if it doesn't exist or overwriting it if it does.
+- **Description:** Writes content to a specified file, creating it if it doesn't exist or overwriting it if it does. Also outputs a diff of the changes made.
 - **Input Schema:**
   ```json
   {
