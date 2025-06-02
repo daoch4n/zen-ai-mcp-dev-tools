@@ -22,9 +22,7 @@ You have development tools at your disposal. Use relevant tools from dev-tools M
 
 ## Integration with MCP-SuperAssistant
 
-`mcp-dev-tools` can be used in conjunction with 
-
-[MCP-SuperAssistant](https://github.com/srbhptl39/MCP-SuperAssistant/) to extend online chat-based assistants such as ChatGPT, Google Gemini, Perplexity, Grok, Google AI Studio, OpenRouter Chat, DeepSeek, Kagi, and T3 Chat.
+`mcp-dev-tools` can be used in conjunction with [MCP-SuperAssistant](https://github.com/srbhptl39/MCP-SuperAssistant/) to extend online chat-based assistants such as ChatGPT, Google Gemini, Perplexity, Grok, Google AI Studio, OpenRouter Chat, DeepSeek, Kagi, and T3 Chat.
 
 ## MCP Server Configuration Example
 
