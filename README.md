@@ -14,8 +14,7 @@ pip install uv
 ./server.sh -p 1337
 ```
 
-## Prompting
-- When using mcp-dev-tools running over SSE, don't forget to include this in your AI assistant system prompt:
+## AI System Prompt
 
 ```
 You have development tools at your disposal. Use relevant tools from dev-tools MCP server for git and file operations. When using any tool from it, always provide the full current working directory path as the 'repo_path' option.
