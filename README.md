@@ -359,3 +359,24 @@ This MCP server provides the following Git-related tools:
       "content"
     ]
   }
+  ```
+
+### `execute_command`
+- **Description:** Executes a custom shell command within the specified repository path.
+- **Input Schema:**
+  ```json
+  {
+    "type": "object",
+    "properties": {
+      "repo_path": {
+        "type": "string"
+      },
+      "command": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "repo_path",
+      "command"
+    ]
+  }
