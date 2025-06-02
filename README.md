@@ -6,7 +6,7 @@
   -  general file manipulation (`search_and_replace`, `write_to_file`)
   -  ability to execute shell commands (`execute_command`)
 - All these functionalities are accessible via Server-Sent Events (SSE), making it a powerful and versatile server for various development needs.
-- Filesystem access boundaries are maintained via passing `repo_path` to every file command, so AI assistant only has read/write access to files in your repo (or whatever it decides to pass as `repo_path` , make sure system prompt is solid on that part).
+- Filesystem access boundaries are maintained via passing `repo_path` to every file command, so AI assistant only has read/write access to files in the current workspace (or whatever it decides to pass as `repo_path` , make sure system prompt is solid on that part).
 - It also won't stop assistant from `execute_command` rm -rf ~/* , so execise extreme caution with auto-allowing command execution tool or at least don't leave assistant unattended when doing so.
 
 ## Prerequisites
