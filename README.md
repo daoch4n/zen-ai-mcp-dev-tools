@@ -6,8 +6,8 @@
   -  general file manipulation (`search_and_replace`, `write_to_file`)
   -  ability to execute shell commands (`execute_command`)
 - All these functionalities are accessible via Server-Sent Events (SSE), making it a powerful and versatile server for various development needs.
-- Filesystem access boundaries are maintained via passing `repo_path` to every file command, so AI assistant can only read files relative to your repo.
-- It won't stop assistant from `execute_command` rm -rf ~/* though, so execise extreme caution with auto-allowing command execution tool or at least don't leave assistant unattended when doing so.
+- Filesystem access boundaries are maintained via passing `repo_path` to every file command, so AI assistant only has read/write access to files in your your repo (or whatever AI assistant decides to pass as `repo_path` , make sure system prompt is solid on that part).
+- It also won't stop assistant from `execute_command` rm -rf ~/* , so execise extreme caution with auto-allowing command execution tool or at least don't leave assistant unattended when doing so.
 
 ## Prerequisites
 
@@ -32,7 +32,7 @@ pip install uv
 ## AI System Prompt
 
 ```
-You have development tools at your disposal. Use relevant tools from devtools MCP server for git and file operations. When using any tool from it, always provide the full current working directory path as the 'repo_path' option.
+You have development tools at your disposal. Use relevant tools from devtools MCP server for git and file operations. When using any tool from it, always provide the current repository full current working directory path as the 'repo_path' option, do not set it to any other folder. 'repo_path' must be explicitly asked from user in beginning of conversation.
 ```
 
 ## Integration
