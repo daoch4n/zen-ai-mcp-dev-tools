@@ -1,4 +1,4 @@
-# mcp-dev-tools: A Multi-functional Development Tools Server
+# mcp-devtools: multi-functional development tools mcp server
 
 This project provides a versatile MCP (Model Context Protocol) server running over the SSE (Server-Sent Events) protocol. `mcp-dev-tools` offers a comprehensive suite of development tools, including extensive Git operations (status, diff, commit, add, reset, log, branch management, checkout, show, apply diff, read file, stage all), general file manipulation (`search_and_replace`, `write_to_file`), and the ability to execute custom shell commands (`execute_command`). All these functionalities are accessible via Server-Sent Events (SSE), making it a powerful and versatile server for various development needs.
 
@@ -28,18 +28,18 @@ pip install uv
 You have development tools at your disposal. Use relevant tools from dev-tools MCP server for git and file operations. When using any tool from it, always provide the full current working directory path as the 'repo_path' option.
 ```
 
-## Integration with MCP-SuperAssistant
+## Integration
 
-`mcp-dev-tools` can be used in conjunction with [MCP-SuperAssistant](https://github.com/srbhptl39/MCP-SuperAssistant/) to extend online chat-based assistants such as ChatGPT, Google Gemini, Perplexity, Grok, Google AI Studio, OpenRouter Chat, DeepSeek, Kagi, and T3 Chat.
+`mcp-devtools` is designed to be used in conjunction with [MCP-SuperAssistant](https://github.com/srbhptl39/MCP-SuperAssistant/) or similar projects to extend online chat-based assistants such as ChatGPT, Google Gemini, Perplexity, Grok, Google AI Studio, OpenRouter Chat, DeepSeek, Kagi, T3 Chat with direct access to local files, git and cli tools.
 
 ## MCP Server Configuration Example
 
-To integrate `mcp-dev-tools` with your AI assistant, add the following configuration to your MCP settings file:
+To integrate `mcp-devtools` with your AI assistant, add the following configuration to your MCP settings file:
 
 ```json
 {
   "mcpServers": {
-    "dev-tools": {
+    "devtools": {
       "url": "http://127.0.0.1:1337/sse",
       "disabled": false,
       "alwaysAllow": [],
@@ -51,7 +51,7 @@ To integrate `mcp-dev-tools` with your AI assistant, add the following configura
 
 ## Available Tools
 
-This mcp-dev-tools server provides a suite of development tools, including Git-related functionalities and general file manipulation commands, and console commands execution:
+This mcp-devtools server provides a suite of development tools, including Git-related functionalities and general file manipulation commands, and console commands execution:
 
 ### `git_status`
 - **Description:** Shows the working tree status.
