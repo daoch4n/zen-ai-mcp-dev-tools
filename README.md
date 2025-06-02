@@ -32,7 +32,7 @@ pip install uv
 ## AI System Prompt
 
 ```
-You have development tools at your disposal. Use relevant tools from devtools MCP server for git and file operations. When using any tool from it, always provide the current repository full current working directory path as the 'repo_path' option, do not set it to any other folder. 'repo_path' must be explicitly asked from user in beginning of conversation.
+You have development tools at your disposal. Use relevant tools from devtools MCP server for git management, file operations, and terminal access. When using any tool from devtools, always provide the current repository full current working directory path as the 'repo_path' option, do not set it to any other folder. 'repo_path' must be explicitly asked from user in beginning of conversation.
 ```
 
 ## Integration
