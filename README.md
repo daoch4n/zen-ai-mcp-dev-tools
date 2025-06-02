@@ -12,6 +12,9 @@ This project provides a versatile MCP (Model Context Protocol) server running ov
 - When using mcp-dev-tools running over SSE, don't forget to include this in your AI assistant system prompt:
   - `You are an AI assistant specialized in development tasks. Use mcp-dev-tools for all operations. When using any tool, always provide the full current working directory path as the 'repo_path' option.`
 
+## Integration with MCP-SuperAssistant
+`mcp-dev-tools` can be used in conjunction with [MCP-SuperAssistant](https://github.com/srbhptl39/MCP-SuperAssistant/) to extend online chat-based assistants such as ChatGPT, Google Gemini, Perplexity, Grok, Google AI Studio, OpenRouter Chat, DeepSeek, Kagi, and T3 Chat.
+
 ## Available Tools
 
 This mcp-dev-tools server provides a suite of development tools, including Git-related functionalities and general file manipulation commands:
