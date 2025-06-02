@@ -1,18 +1,20 @@
-# A simple Git MCP server based on [mcp-server-git](https://pypi.org/project/mcp-server-git) , adapted to run over SSE protocol
+# mcp-dev-tools: A Multi-functional Development Tools Server
+
+This project provides a versatile MCP (Model Context Protocol) server running over the SSE (Server-Sent Events) protocol. `mcp-dev-tools` offers a comprehensive suite of development tools, including extensive Git operations (status, diff, commit, add, reset, log, branch management, checkout, show, apply diff, read file, stage all), general file manipulation (`search_and_replace`, `write_to_file`), and the ability to execute custom shell commands (`execute_command`). All these functionalities are accessible via Server-Sent Events (SSE), making it a powerful and versatile server for various development needs.
 
 ## Prerequisites
 - `pip install uv`
 
 ## Usage
-- Run it with `./server.sh` , it will handle installation and server startup, adjust port if needed
+- Run it with `./server.sh`, it will handle installation and server startup, adjust port if needed
 
-## Prompting 
-- When using Git MCP over SSE, dont forget to include this in your AI assistant system prompt:
-  - `Always use Git through MCP server, when using any tool from it, you need to always pass full cwd path as repo_path option`
+## Prompting
+- When using mcp-dev-tools running over SSE, don't forget to include this in your AI assistant system prompt:
+  - `You are an AI assistant that can use mcp-dev-tools. When using any tool from it, always pass the full current working directory path as the 'repo_path' option.`
 
 ## Available Tools
 
-This MCP server provides the following Git-related tools:
+This mcp-dev-tools server provides a suite of development tools, including Git-related functionalities and general file manipulation commands:
 
 ### `git_status`
 - **Description:** Shows the working tree status.
