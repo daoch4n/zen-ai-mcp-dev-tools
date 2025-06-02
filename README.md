@@ -376,7 +376,7 @@ This mcp-devtools server provides a suite of development tools, including Git-re
   ```
 
 ### `write_to_file`
-- **Description:** Writes content to a specified file, creating it if it doesn't exist or overwriting it if it does. Also outputs a diff of the changes made.
+- **Description:** Writes content to a specified file, creating it if it doesn't exist or overwriting it if it does. Also outputs a diff of the changes made after successful write and `tsc --noemit --allowJs` output for `.js` `.mjs` `.ts` files to facilitate clean edits.
 - **Input Schema:**
   ```json
   {
