@@ -3,23 +3,30 @@
 This project provides a versatile MCP (Model Context Protocol) server running over the SSE (Server-Sent Events) protocol. `mcp-dev-tools` offers a comprehensive suite of development tools, including extensive Git operations (status, diff, commit, add, reset, log, branch management, checkout, show, apply diff, read file, stage all), general file manipulation (`search_and_replace`, `write_to_file`), and the ability to execute custom shell commands (`execute_command`). All these functionalities are accessible via Server-Sent Events (SSE), making it a powerful and versatile server for various development needs.
 
 ## Prerequisites
+
 ```bash
 pip install uv
 ```
 
 ## Usage
+
 ```bash
 ./server.sh -p 1337
 ```
 
 ## Prompting
 - When using mcp-dev-tools running over SSE, don't forget to include this in your AI assistant system prompt:
-  ```
+
+```
 You have development tools at your disposal. Use relevant tools from dev-tools MCP server for git and file operations. When using any tool from it, always provide the full current working directory path as the 'repo_path' option.
 ```
 
 ## Integration with MCP-SuperAssistant
-`mcp-dev-tools` can be used in conjunction with [MCP-SuperAssistant](https://github.com/srbhptl39/MCP-SuperAssistant/) to extend online chat-based assistants such as ChatGPT, Google Gemini, Perplexity, Grok, Google AI Studio, OpenRouter Chat, DeepSeek, Kagi, and T3 Chat.
+
+`mcp-dev-tools` can be used in conjunction with 
+
+[MCP-SuperAssistant](https://github.com/srbhptl39/MCP-SuperAssistant/) to extend online chat-based assistants such as ChatGPT, Google Gemini, Perplexity, Grok, Google AI Studio, OpenRouter Chat, DeepSeek, Kagi, and T3 Chat.
+
 ## MCP Server Configuration Example
 
 To integrate `mcp-dev-tools` as a `dev-tools` with your AI assistant, add the following configuration to your MCP settings file:
