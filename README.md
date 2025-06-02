@@ -1,6 +1,13 @@
 # mcp-devtools: multi-functional development tools mcp server
 
-This project provides a versatile MCP (Model Context Protocol) server running over the SSE (Server-Sent Events) protocol. `mcp-devtools` offers a comprehensive suite of development tools, including extensive Git operations (`git_status`, `git_diff`, `git_commit`, `git_add`, `git_reset`, `git_log`, branch management, `git_checkout`, `git_show`, `git_apply_diff`, `git_read_file`, `git_stage_all`), general file manipulation (`search_and_replace`, `write_to_file`), and the ability to execute custom shell commands (`execute_command`). All these functionalities are accessible via Server-Sent Events (SSE), making it a powerful and versatile server for various development needs. Filesystem access control is maintained via passing `repo_path` to every file command, so AI assistant can only read files relative to your repo. It won't stop assistant from `execute_command` rm -rf ~/* though, so execise extreme caution when auto-allowing command execution tool or at least don't leave assistant unattended with command auto-execution on.
+- This project provides a versatile MCP (Model Context Protocol) server running over the SSE (Server-Sent Events) protocol.
+- `mcp-devtools` offers a comprehensive suite of development tools, including extensive Git operations
+  -  (`git_status`, `git_diff`, `git_commit`, `git_add`, `git_reset`, `git_log`, branch management, `git_checkout`, `git_show`, `git_apply_diff`, `git_read_file`, `git_stage_all`)
+  -  general file manipulation (`search_and_replace`, `write_to_file`)
+  -  ability to execute shell commands (`execute_command`)
+- All these functionalities are accessible via Server-Sent Events (SSE), making it a powerful and versatile server for various development needs.
+- Filesystem access boundaries are maintained via passing `repo_path` to every file command, so AI assistant can only read files relative to your repo.
+- It won't stop assistant from `execute_command` rm -rf ~/* though, so execise extreme caution with auto-allowing command execution tool or at least don't leave assistant unattended when doing so.
 
 ## Prerequisites
 
