@@ -1,6 +1,6 @@
 # mcp-devtools: multi-functional development tools mcp server
 
-This project provides a versatile MCP (Model Context Protocol) server running over the SSE (Server-Sent Events) protocol. `mcp-dev-tools` offers a comprehensive suite of development tools, including extensive Git operations (status, diff, commit, add, reset, log, branch management, checkout, show, apply diff, read file, stage all), general file manipulation (`search_and_replace`, `write_to_file`), and the ability to execute custom shell commands (`execute_command`). All these functionalities are accessible via Server-Sent Events (SSE), making it a powerful and versatile server for various development needs.
+This project provides a versatile MCP (Model Context Protocol) server running over the SSE (Server-Sent Events) protocol. `mcp-devtools` offers a comprehensive suite of development tools, including extensive Git operations (`git_status`, `git_diff`, `git_commit`, `git_add`, `git_reset`, `git_log`, branch management, `git_checkout`, `git_show`, `git_apply_diff`, `git_read_file`, `git_stage_all`), general file manipulation (`search_and_replace`, `write_to_file`), and the ability to execute custom shell commands (`execute_command`). All these functionalities are accessible via Server-Sent Events (SSE), making it a powerful and versatile server for various development needs.
 
 ## Prerequisites
 
