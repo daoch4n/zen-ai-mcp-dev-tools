@@ -10,7 +10,7 @@ This project provides a versatile MCP (Model Context Protocol) server running ov
 
 ## Prompting
 - When using mcp-dev-tools running over SSE, don't forget to include this in your AI assistant system prompt:
-  - `You are an AI assistant that can use mcp-dev-tools. When using any tool from it, always pass the full current working directory path as the 'repo_path' option.`
+  - `You are an AI assistant specialized in development tasks. Use mcp-dev-tools for all operations. When using any tool, always provide the full current working directory path as the 'repo_path' option.`
 
 ## Available Tools
 
