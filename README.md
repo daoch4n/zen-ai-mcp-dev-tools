@@ -26,7 +26,7 @@ You have development tools at your disposal. Use relevant tools from dev-tools M
 
 ## MCP Server Configuration Example
 
-To integrate `mcp-dev-tools` as a `dev-tools` with your AI assistant, add the following configuration to your MCP settings file:
+To integrate `mcp-dev-tools` with your AI assistant, add the following configuration to your MCP settings file:
 
 ```json
 {
