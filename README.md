@@ -6,7 +6,7 @@ This project provides a versatile MCP (Model Context Protocol) server running ov
 - `pip install uv`
 
 ## Usage
-- Run it with `./server.sh`, it will handle installation and server startup, adjust port if needed
+- Run it with `./server.sh [--port <port_number>]`, it will handle installation and server startup.
 
 ## Prompting
 - When using mcp-dev-tools running over SSE, don't forget to include this in your AI assistant system prompt:
