@@ -6,7 +6,7 @@ This project provides a versatile MCP (Model Context Protocol) server running ov
 - `pip install uv`
 
 ## Usage
-- Run it with `./server.sh [-p <port_number>]`, it will handle installation and server startup.
+- Run it with `./server.sh -p 1337`, it will handle installation and server startup.
 
 ## Prompting
 - When using mcp-dev-tools running over SSE, don't forget to include this in your AI assistant system prompt:
@@ -16,38 +16,15 @@ This project provides a versatile MCP (Model Context Protocol) server running ov
 `mcp-dev-tools` can be used in conjunction with [MCP-SuperAssistant](https://github.com/srbhptl39/MCP-SuperAssistant/) to extend online chat-based assistants such as ChatGPT, Google Gemini, Perplexity, Grok, Google AI Studio, OpenRouter Chat, DeepSeek, Kagi, and T3 Chat.
 ## MCP Server Configuration Example
 
-To integrate `mcp-dev-tools` as a `git-server` with MCP-SuperAssistant, you can add the following configuration to your `mcp_settings.json` file:
+To integrate `mcp-dev-tools` as a `dev-tools` with your AI assistant, add the following configuration to your MCP settings file:
 
 ```json
 {
   "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "C:\\Users\\username\\Desktop",
-        "C:\\Users\\username\\Downloads"
-      ]
-    },
-    "git-server": {
-      "url": "http://localhost:4754/sse",
+    "dev-tools": {
+      "url": "http://127.0.0.1:1337/sse",
       "disabled": false,
-      "alwaysAllow": [
-        "git_add",
-        "git_commit",
-        "list_tools",
-        "git_status",
-        "git_diff_unstaged",
-        "git_diff_staged",
-        "git_diff",
-        "git_log",
-        "git_create_branch",
-        "git_checkout",
-        "git_show",
-        "execute_command",
-        "git_reset"
-      ],
+      "alwaysAllow": [],
       "timeout": 15
     }
   }
