@@ -10,8 +10,16 @@ pip install uv
 
 ## Usage
 
+### Linux/macOS
+
 ```bash
 ./server.sh -p 1337
+```
+
+### Windows
+
+```powershell
+.\server.ps1 -p 1337
 ```
 
 ## AI System Prompt
