@@ -51,7 +51,7 @@ To integrate `mcp-dev-tools` with your AI assistant, add the following configura
 
 ## Available Tools
 
-This mcp-dev-tools server provides a suite of development tools, including Git-related functionalities and general file manipulation commands:
+This mcp-dev-tools server provides a suite of development tools, including Git-related functionalities and general file manipulation commands, and console commands execution:
 
 ### `git_status`
 - **Description:** Shows the working tree status.
