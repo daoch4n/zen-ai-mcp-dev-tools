@@ -296,7 +296,7 @@ This MCP server provides the following Git-related tools:
   ```
 
 ### `search_and_replace`
-- **Description:** Searches for a string or regex pattern in a file and replaces it with another string.
+- **Description:** Searches for a string or regex pattern in a file and replaces it with another string. It first attempts a literal search and falls back to a regex search if no literal matches are found.
 - **Input Schema:**
   ```json
   {
