@@ -425,3 +425,29 @@ This mcp-devtools server provides a suite of development tools, including Git-re
       "command"
     ]
   }
+  ```
+
+## Known Issues and Workarounds
+
+### `write_to_file` and Direct Code Editing
+
+When using the `write_to_file` tool for direct code editing, especially with languages like JavaScript that utilize template literals (strings enclosed by backticks `` ` ``), you may encounter unexpected syntax errors. This issue stems from the client-side generation of the `content` string, where backticks and dollar signs within template literals might be incorrectly escaped with extra backslashes (`\`).
+
+**Example of incorrect escaping:**
+
+Instead of:
+```javascript
+return `Log level set to ${levelName.toUpperCase()}`;
+```
+
+The tool might receive and write:
+```javascript
+return \`Log level set to \${levelName.toUpperCase()}\`;
+```
+
+This leads to `TS1127: Invalid character.` and `TS1160: Unterminated template literal.` errors during TypeScript compilation.
+
+**Workaround:**
+
+*   **Manual Verification:** Always manually verify the content of files written using `write_to_file` if they contain template literals or other characters that might be subject to escaping.
+*   **Client-Side Adjustment:** If you are developing or controlling the client application that calls this tool, ensure that the `content` string is generated without any erroneous escaping of backticks (` `) or dollar signs (`$`) within template literals. These characters should be passed literally to the `write_to_file` tool.
