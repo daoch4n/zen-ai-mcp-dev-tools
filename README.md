@@ -68,7 +68,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 
 **Workarounds:**
 
-*    🤖 (most reliable) Instruct your AI assistant to delegate editing files to MCP-compatible coding agent by adding it as another MCP server, as it is more suitable for direct code manipulation, and let AI assistant act as task orchestrator that will write down plans and docs with `write_to_file` and delegate coding to specialized agent, then use `git_read_file` to check up on agent work, and manage git operations ([Aider](https://github.com/Aider-AI/aider) via [its MCP bridge](https://github.com/daoch4n/zen-ai-mcp-aider) is a good candidate to explore).
+*    🤖 (most reliable) Instruct your AI assistant to delegate editing files to MCP-compatible coding agent by adding it as another MCP server, as it is more suitable for direct code manipulation, and let AI assistant act as task orchestrator that will write down plans and docs with `write_to_file` and delegate coding to specialized agent, then use `git_read_file` or `git_diff` to check up on agent work, and manage commits and branches ([Aider](https://github.com/Aider-AI/aider) via [its MCP bridge](https://github.com/daoch4n/zen-ai-mcp-aider) is a good candidate to explore).
 *    🖥️ (if you're feeling lucky) Instruct your AI assistant to craft a terminal command to edit problematic file via `execute_command` tool.
 
 ## Available Tools
