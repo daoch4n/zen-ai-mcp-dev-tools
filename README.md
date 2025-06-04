@@ -355,7 +355,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   ```
 
 ### `search_and_replace`
-- **Description:** Searches for a string or regex pattern in a file and replaces it with another string. It first attempts a literal search and falls back to a regex search if no literal matches are found.
+- **Description:** Searches for a string or regex pattern in a file and replaces it with another string. It first attempts to use `sed` for the replacement. If `sed` fails or makes no changes, it falls back to a Python-based logic that first attempts a literal search and then a regex search if no literal matches are found.
 - **Input Schema:**
   ```json
   {
