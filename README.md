@@ -55,9 +55,36 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 }
 ```
 
-## Available Tools
+## Known Issues and Workarounds
 
-This mcp-devtools server provides a suite of development tools, including Git-related functionalities and general file manipulation commands, and console commands execution:
+**Issue:**
+### `write_to_file` and Direct Code Editing
+
+*    🔍 When using the `write_to_file` tool for direct code editing, especially with languages like JavaScript that utilize template literals (strings enclosed by backticks), you may encounter unexpected syntax errors. This issue stems from how the AI assistant generates the `content` string, where backticks and dollar signs within template literals might be incorrectly escaped with extra backslashes (`\`).
+
+**Example of incorrect escaping:**
+
+Instead of:
+```javascript
+return `Log level set to ${levelName.toUpperCase()}`;
+```
+
+The tool might receive and write:
+```javascript
+return \`Log level set to \${levelName.toUpperCase()}\`;
+```
+
+This leads to `TS1127: Invalid character.` and `TS1160: Unterminated template literal.` errors during TypeScript check.
+
+**Mitigation:** 
+
+*    🔨 The `write_to_file` tool integrates with `tsc` (TypeScript compiler) for `.js`, `.mjs`, and `.ts` files. The output of `tsc --noEmit --allowJs` is provided as part of the tool's response. AI assistants should parse this output to detect any compiler errors and *should not proceed with further actions* if errors are reported, indicating a problem with the written code.
+
+**Workaround:**
+
+*    🤖 Instruct your AI assistant to delegate editing files to MCP-compatible coding agent instead of applying direct edits by adding it as another MCP server ([Aider](https://github.com/Aider-AI/aider) can act as MCP server, via [its MCP bridge](https://github.com/daoch4n/zen-ai-mcp-aider))
+
+## Available Tools
 
 ### `git_status`
 - **Description:** Shows the working tree status.
@@ -426,29 +453,3 @@ This mcp-devtools server provides a suite of development tools, including Git-re
     ]
   }
   ```
-
-## Known Issues and Workarounds
-
-### `write_to_file` and Direct Code Editing
-
-When using the `write_to_file` tool for direct code editing, especially with languages like JavaScript that utilize template literals (strings enclosed by backticks `` ` ``), you may encounter unexpected syntax errors. This issue stems from the client-side generation of the `content` string, where backticks and dollar signs within template literals might be incorrectly escaped with extra backslashes (`\`).
-
-**Example of incorrect escaping:**
-
-Instead of:
-```javascript
-return `Log level set to ${levelName.toUpperCase()}`;
-```
-
-The tool might receive and write:
-```javascript
-return \`Log level set to \${levelName.toUpperCase()}\`;
-```
-
-This leads to `TS1127: Invalid character.` and `TS1160: Unterminated template literal.` errors during TypeScript compilation.
-
-**Workaround:**
-
-*   **Manual Verification:** Always manually verify the content of files written using `write_to_file` if they contain template literals or other characters that might be subject to escaping.
-*   **Client-Side Adjustment:** If you are developing or controlling the client application that calls this tool, ensure that the `content` string is generated without any erroneous escaping of backticks (` `) or dollar signs (`$`) within template literals. These characters should be passed literally to the `write_to_file` tool.
-*   **TSC Integration:** The `write_to_file` tool integrates with `tsc` (TypeScript compiler) for `.js`, `.mjs`, and `.ts` files. The output of `tsc --noEmit --allowJs` is provided as part of the tool's response. AI assistants should parse this output to detect any compilation errors and *should not proceed with further actions* if errors are reported, indicating a problem with the written code.
