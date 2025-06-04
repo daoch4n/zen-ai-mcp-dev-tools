@@ -80,9 +80,10 @@ This leads to `TS1127: Invalid character.` and `TS1160: Unterminated template li
 
 *    🔨 The `write_to_file` tool integrates with `tsc` (TypeScript compiler) for `.js`, `.mjs`, and `.ts` files. The output of `tsc --noEmit --allowJs` is provided as part of the tool's response. AI assistants should parse this output to detect any compiler errors and *should not proceed with further actions* if errors are reported, indicating a problem with the written code.
 
-**Workaround:**
+**Workarounds:**
 
-*    🤖 Instruct your AI assistant to delegate editing files to MCP-compatible coding agent instead of applying direct edits by adding it as another MCP server ([Aider](https://github.com/Aider-AI/aider) can act as MCP server, via [its MCP bridge](https://github.com/daoch4n/zen-ai-mcp-aider))
+*    🤖 Instruct your AI assistant to delegate editing files to MCP-compatible coding agent instead of applying direct edits by adding it as another MCP server ([Aider](https://github.com/Aider-AI/aider) can act as MCP server, via [its MCP bridge](https://github.com/daoch4n/zen-ai-mcp-aider)).
+*    🖥️ Instruct your AI assistant to craft a terminal command to edit problematic file via `execute_command` tool.
 
 ## Available Tools
 
