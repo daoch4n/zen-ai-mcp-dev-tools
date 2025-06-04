@@ -421,7 +421,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   ```
 
 ### `execute_command`
-- **Description:** Executes a custom shell command within the specified repository path.
+- **Description:** Executes a custom shell command. The `repo_path` parameter is used to set the current working directory (cwd) for the executed command.
 - **Input Schema:**
   ```json
   {
