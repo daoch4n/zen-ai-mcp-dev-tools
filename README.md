@@ -1,6 +1,5 @@
-# mcp-devtools: multi-functional development tools mcp server
+# mcp-devtools: multi-functional development tools MCP server over SSE
 
-- This project provides a versatile MCP (Model Context Protocol) server running over the SSE (Server-Sent Events) protocol.
 - `mcp-devtools` offers a comprehensive suite of development tools, including extensive Git operations
   -  (`git_status`, `git_diff`, `git_commit`, `git_add`, `git_reset`, `git_log`, branch management, `git_checkout`, `git_show`, `git_apply_diff`, `git_read_file`, `git_stage_all`)
   -  general file manipulation (`search_and_replace`, `write_to_file`)
@@ -15,17 +14,26 @@
 pip install uv
 ```
 
-## Usage
+## Running with uvx (Recommended)
+
+```bash
+uvx mcp-devtools@latest -p 1337
+```
+## Running from git
 
 ### Linux/macOS
 
 ```bash
+git clone "https://github.com/daoch4n/zen-ai-mcp-devtools/"
+cd zen-ai-mcp-devtools
 ./server.sh -p 1337
 ```
 
 ### Windows
 
 ```powershell
+git clone "https://github.com/daoch4n/zen-ai-mcp-devtools/"
+cd zen-ai-mcp-devtools
 .\server.ps1 -p 1337
 ```
 
