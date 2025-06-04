@@ -58,23 +58,9 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 ## Known Issues and Workarounds
 
 **Issue:**
-### `write_to_file` and Direct Code Editing
+### `write_to_file` and 💾 Direct Code Editing vs 🤖 Delegated Editing by Coding Agent
 
 *    🔍 When using the `write_to_file` tool for direct code editing, especially with languages like JavaScript that utilize template literals (strings enclosed by backticks), you may encounter unexpected syntax errors. This issue stems from how the AI assistant generates the `content` string, where backticks and dollar signs within template literals might be incorrectly escaped with extra backslashes (`\`).
-
-**Example of incorrect escaping:**
-
-Instead of:
-```javascript
-return `Log level set to ${levelName.toUpperCase()}`;
-```
-
-The tool might receive and write:
-```javascript
-return \`Log level set to \${levelName.toUpperCase()}\`;
-```
-
-This leads to `TS1127: Invalid character.` and `TS1160: Unterminated template literal.` errors during TypeScript check.
 
 **Mitigation:** 
 
@@ -82,8 +68,8 @@ This leads to `TS1127: Invalid character.` and `TS1160: Unterminated template li
 
 **Workarounds:**
 
-*    🤖 Instruct your AI assistant to delegate editing files to MCP-compatible coding agent instead of applying direct edits by adding it as another MCP server ([Aider](https://github.com/Aider-AI/aider) can act as MCP server, via [its MCP bridge](https://github.com/daoch4n/zen-ai-mcp-aider)).
-*    🖥️ Instruct your AI assistant to craft a terminal command to edit problematic file via `execute_command` tool.
+*    🤖 (most reliable) Instruct your AI assistant to delegate editing files to MCP-compatible coding agent by adding it as another MCP server, as it is more suitable for direct code manipulation, and let AI assistant act as task orchestrator that will plan and delegate edits, use `git_read_file` to check agent work, and manage git operations ([Aider](https://github.com/Aider-AI/aider) via [its MCP bridge](https://github.com/daoch4n/zen-ai-mcp-aider) is a good candidate to explore).
+*    🖥️ (if you're feeling lucky) Instruct your AI assistant to craft a terminal command to edit problematic file via `execute_command` tool.
 
 ## Available Tools
 
