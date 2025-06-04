@@ -296,7 +296,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   ```
 
 ### `git_apply_diff`
-- **Description:** Applies a diff to the working directory.
+- **Description:** Applies a diff to the working directory. Also outputs a diff of the changes made after successful application and `tsc --noEmit --allowJs` output for `.js`, `.mjs`, and `.ts` files to facilitate clean edits.
 - **Input Schema:**
   ```json
   {
