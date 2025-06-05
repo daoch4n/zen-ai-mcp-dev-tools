@@ -67,6 +67,8 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 
 When using the `ai_edit` tool (which leverages `aider`), the following environment variables can be set to configure `aider`'s behavior. These are optional; if not set, `aider` will use its default behavior or the defaults configured within `mcp-devtools`.
 
+For a detailed explanation of Aider's configuration hierarchy and how settings are applied, please refer to the [Aider Configuration documentation](docs/aider_config.md).
+
 - `OPENAI_API_KEY`: Your OpenAI API key. Required for accessing OpenAI models.
 - `OPENAI_API_BASE`: (Optional) The base URL for the OpenAI API, useful for custom endpoints or proxying.
 - `AIDER_MODEL`: (Optional) Specifies the model to use with `aider`. If unset, `mcp-devtools` defaults to `gemini-2.5-flash-preview-05-20-refined-high`.
