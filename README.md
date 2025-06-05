@@ -67,15 +67,10 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 }
 ```
 
-## Aider Integration Environment Variables
+## Aider Integration 
 
-When using the `ai_edit` tool (which leverages [Aider](https://github.com/Aider-AI/aider)), the following environment variables can be set to configure `Aider`'s behavior. These are optional; if not set, `Aider` will use its default behavior or the defaults configured within `mcp-devtools`.
+When using the `ai_edit` tool (which leverages [Aider](https://github.com/Aider-AI/aider)), please refer to the [Aider Configuration documentation](docs/aider_config.md).
 
-For a detailed explanation of Aider's configuration hierarchy and how settings are applied, please refer to the [Aider Configuration documentation](docs/aider_config.md).
-
-- `OPENAI_API_KEY`: Your OpenAI API key.
-- `OPENAI_API_BASE`: (Optional) The base URL for the OpenAI API custom endpoints.
-- `AIDER_MODEL`: (Optional) Specifies the model to use with `Aider`.
 
 ## Known Issues and Workarounds
 
