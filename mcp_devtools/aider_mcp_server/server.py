@@ -252,11 +252,6 @@ async def server_lifespan(server: Server, init_options: Optional[Dict[str, Any]]
         if key not in os.environ:  # Don't override existing env vars
             logger.debug(f"Setting environment variable: {key}")
             os.environ[key] = value
-
-    # Set OPENAI_API_BASE from aider_config if not already set
-    if "OPENAI_API_BASE" in aider_config and "OPENAI_API_BASE" not in os.environ:
-        os.environ["OPENAI_API_BASE"] = aider_config["OPENAI_API_BASE"]
-        logger.debug(f"Setting OPENAI_API_BASE from config: {aider_config['OPENAI_API_BASE']}")
     
     # Remember the original directory
     original_dir = os.getcwd()
