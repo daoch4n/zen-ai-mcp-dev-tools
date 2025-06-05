@@ -18,7 +18,7 @@
 pip install uv
 ```
 
-## Running with uvx (Recommended)
+## Running from pypi
 
 ```bash
 uvx mcp-devtools@latest -p 1337
