@@ -587,6 +587,8 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
     if not ctx:
         return [TextContent(type="text", text="Error: Application context not initialized.")]
     
+    original_dir: Optional[str] = None
+
     try:
         # Tool: edit_files
         if name == "edit_files":
@@ -640,54 +642,54 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
                 instructions_file = f.name
                 logger.debug(f"Instructions written to temporary file: {instructions_file}")
             
+            stdout = ""
+            stderr = ""
             try:
                 # Save current directory
                 original_dir = os.getcwd()
-                
+
                 # Change to the target directory
                 os.chdir(directory_path)
                 logger.debug(f"Changed working directory to: {directory_path}")
-                
+
                 # Build the command
                 base_command = [ctx.aider_path]
                 command = prepare_aider_command(
                     base_command,
-                    [],  # No specific files, Aider will handle this 
+                    [],  # No specific files, Aider will handle this
                     aider_options
                 )
-                
+
                 logger.info(f"Running aider command: {' '.join(command)}")
-                
+
                 # Execute Aider with the instructions
                 with open(instructions_file, 'r') as f:
                     instructions_content = f.read()
-                    
+
                 logger.debug("Executing Aider with the instructions...")
                 stdout, stderr = await run_command(command, instructions_content)
-                
-                # Change back to original directory
-                os.chdir(original_dir)
-                
-                if stderr and ("error" in stderr.lower() or "exception" in stderr.lower()):
-                    logger.error(f"Aider reported an error: {stderr}")
-                    return [TextContent(
-                        type="text",
-                        text=f"Error making code changes:\n{stderr}\n\nOutput:\n{stdout}"
-                    )]
-                
-                logger.info("Code changes completed successfully")
-                return [TextContent(
-                    type="text",
-                    text=f"Code changes completed successfully:\n\n{stdout}"
-                )]
+
             finally:
                 logger.debug(f"Cleaning up temporary file: {instructions_file}")
                 os.unlink(instructions_file)
-                
+
                 # Ensure we're back in the original directory
-                if os.getcwd() != original_dir:
+                if original_dir is not None and os.getcwd() != original_dir:
                     os.chdir(original_dir)
                     logger.debug(f"Restored working directory to: {original_dir}")
+
+            if stderr and ("error" in stderr.lower() or "exception" in stderr.lower()):
+                logger.error(f"Aider reported an error: {stderr}")
+                return [TextContent(
+                    type="text",
+                    text=f"Error making code changes:\n{stderr}\n\nOutput:\n{stdout}"
+                )]
+
+            logger.info("Code changes completed successfully")
+            return [TextContent(
+                type="text",
+                text=f"Code changes completed successfully:\n\n{stdout}"
+            )]
                 
         # Tool: create_files
         elif name == "create_files":
@@ -710,10 +712,10 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
             logger.debug(f"Git commit: {git_commit}")
             logger.debug(f"Commit message: {message}")
             
-            # Save current directory
-            original_dir = os.getcwd()
-            
             try:
+                # Save current directory
+                original_dir = os.getcwd()
+                
                 # Change to target directory
                 os.chdir(directory_path)
                 logger.debug(f"Changed working directory to: {directory_path}")
@@ -755,7 +757,7 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
                     result_lines.append(f"\nSkipped {len(skipped_files)} files:")
                     result_lines.extend(f"- {file}" for file in skipped_files) # Completed line
                 
-                result = "\n".join(result_lines)
+                result_str = "\n".join(result_lines)
                 
                 if git_commit and created_files:
                     try:
@@ -767,7 +769,7 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
                             logger.warning(f"Not a valid git repository: {git_check_stderr}")
                             return [TextContent(
                                 type="text",
-                                text=f"{result}\n\nFiles were created but not committed: Not a valid git repository."
+                                text=f"{result_str}\n\nFiles were created but not committed: Not a valid git repository."
                             )]
                         
                         # Add files to git
@@ -779,7 +781,7 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
                             logger.error(f"Error adding files to git: {add_stderr}")
                             return [TextContent(
                                 type="text",
-                                text=f"{result}\n\nError adding files to git:\n{add_stderr}"
+                                text=f"{result_str}\n\nError adding files to git:\n{add_stderr}"
                             )]
                         
                         # Commit files
@@ -789,21 +791,22 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
                         
                         if "nothing to commit" in commit_stderr.lower():
                             logger.info("No changes to commit")
-                            result += "\n\nNo changes to commit."
+                            result_str += "\n\nNo changes to commit."
                         elif commit_stderr and "error" in commit_stderr.lower():
-                            result += f"\n\nError committing files:\n{commit_stderr}"
+                            result_str += f"\n\nError committing files:\n{commit_stderr}"
                         else:
-                            result += f"\n\nCommitted files:\n{commit_stdout}"
+                            result_str += f"\n\nCommitted files:\n{commit_stdout}"
                             
                     except Exception as e:
-                        result += f"\n\nError in git operations: {str(e)}"
+                        result_str += f"\n\nError in git operations: {str(e)}"
                 
-                return [TextContent(type="text", text=result)]
+                return [TextContent(type="text", text=result_str)]
                 
             finally:
                 # Change back to original directory
-                os.chdir(original_dir)
-                logger.debug(f"Restored working directory to: {original_dir}")
+                if original_dir is not None and os.getcwd() != original_dir:
+                    os.chdir(original_dir)
+                    logger.debug(f"Restored working directory to: {original_dir}")
             
         # Tool: git_status
         elif name == "git_status":
@@ -824,10 +827,10 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
                     text=f"Error: Directory does not exist: {directory_path}"
                 )]
             
-            # Save current directory
-            original_dir = os.getcwd()
-            
             try:
+                # Save current directory
+                original_dir = os.getcwd()
+                
                 # Change to target directory
                 os.chdir(directory_path)
                 logger.debug(f"Changed working directory to: {directory_path}")
@@ -861,7 +864,8 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
             
             finally:
                 # Change back to original directory
-                os.chdir(original_dir)
+                if original_dir is not None and os.getcwd() != original_dir:
+                    os.chdir(original_dir)
                 logger.debug(f"Restored working directory to: {original_dir}")
             
         # Tool: extract_code
@@ -934,7 +938,7 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
             logger.info("Checking Aider status")
             
             # Basic information
-            result = {}
+            result: Dict[str, Any] = {}
             
             # Check if aider is installed and get its version
             try:
@@ -988,11 +992,11 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
                 
                 if check_environment:
                     # Check API keys
-                    env_vars = {}
+                    env_vars_status: Dict[str, bool] = {}
                     for key in ["OPENAI_API_KEY", "ANTHROPIC_API_KEY", "AIDER_MODEL"]:
-                        env_vars[key] = key in os.environ
+                        env_vars_status[key] = key in os.environ
                     
-                    result["environment"] = env_vars
+                    result["environment"] = env_vars_status
                     
                     # Add configuration information
                     config = load_aider_config(directory_path, ctx.config_file)
@@ -1032,7 +1036,7 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
             
             # Load configuration with specified hierarchy
             config = load_aider_config(directory_path, ctx.config_file)
-            env_vars = load_dotenv_file(directory_path, ctx.env_file)
+            env_vars: Dict[str, str] = load_dotenv_file(directory_path, ctx.env_file)
             
             # Only show if environment variables exist, not their values for security
             env_vars_keys = list(env_vars.keys())
@@ -1065,7 +1069,7 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
             }
             
             # Build a more informative result
-            result = {
+            config_result: Dict[str, Any] = {
                 "directory": directory_path,
                 "aider_config": config,
                 "environment_variables": {
@@ -1085,7 +1089,7 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
             
             return [TextContent(
                 type="text",
-                text=json.dumps(result, indent=2, default=str)
+                text=json.dumps(config_result, indent=2, default=str)
             )]
             
         # Unknown tool
