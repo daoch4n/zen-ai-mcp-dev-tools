@@ -5,7 +5,7 @@
 [![PyPI](https://img.shields.io/pypi/v/mcp-devtools)](https://pypi.org/project/mcp-devtools)
 
 - `mcp-devtools` offers a comprehensive suite of development tools, including extensive Git operations
-  -  (`git_status`, `git_diff`, `git_commit`, `git_add`, `git_reset`, `git_log`, branch management, `git_checkout`, `git_show`, `git_apply_diff`, `git_read_file`, `git_stage_all`)
+  -  (`git_status`, `git_diff`, `git_commit`, `git_reset`, `git_log`, branch management, `git_checkout`, `git_show`, `git_apply_diff`, `git_read_file`)
   -  general file manipulation (`search_and_replace`, `write_to_file`)
   -  ability to execute shell commands (`execute_command`)
 - All these functionalities are accessible via Server-Sent Events (SSE), making it a powerful and versatile server for various development needs.
@@ -164,7 +164,7 @@ When using the `ai_edit` tool (which leverages [Aider](https://github.com/Aider-
   ```
 
 ### `git_commit`
-- **Description:** Records changes to the repository.
+- **Description:** Records changes to the repository. If `files` are provided, only those files will be staged and committed. If `files` are not provided, all changes in the working directory will be staged and committed.
 - **Input Schema:**
   ```json
   {
@@ -175,35 +175,18 @@ When using the `ai_edit` tool (which leverages [Aider](https://github.com/Aider-
       },
       "message": {
         "type": "string"
-      }
-    },
-    "required": [
-      "repo_path",
-      "message"
-    ]
-  }
-  ```
-
-### `git_add`
-- **Description:** Adds file contents to the staging area.
-- **Input Schema:**
-  ```json
-  {
-    "type": "object",
-    "properties": {
-      "repo_path": {
-        "type": "string"
       },
       "files": {
         "type": "array",
         "items": {
           "type": "string"
-        }
+        },
+        "nullable": true
       }
     },
     "required": [
       "repo_path",
-      "files"
+      "message"
     ]
   }
   ```
@@ -355,22 +338,6 @@ When using the `ai_edit` tool (which leverages [Aider](https://github.com/Aider-
   }
   ```
 
-### `git_stage_all`
-- **Description:** Stages all changes in the working directory.
-- **Input Schema:**
-  ```json
-  {
-    "type": "object",
-    "properties": {
-      "repo_path": {
-        "type": "string"
-      }
-    },
-    "required": [
-      "repo_path"
-    ]
-  }
-  ```
 
 ### `search_and_replace`
 - **Description:** Searches for a string or regex pattern in a file and replaces it with another string. It first attempts to use `sed` for the replacement. If `sed` fails or makes no changes, it falls back to a Python-based logic that first attempts a literal search and then a regex search if no literal matches are found. Also outputs a diff of the changes made after successful replacement and `tsc --noEmit --allowJs` output for `.js`, `.mjs`, and `.ts` files to facilitate clean edits.
