@@ -642,6 +642,12 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
             
             # Add the options from the command line
             aider_options.update(additional_opts)
+# Filter out unsupported options
+            unsupported_options = ["base_url"] # Add other unsupported options here if needed
+            for opt_key in unsupported_options:
+                if opt_key in aider_options:
+                    logger.warning(f"Removing unsupported Aider option: --{opt_key.replace('_', '-')}")
+                    del aider_options[opt_key]
             
             # Write the instructions to a temporary file
             with tempfile.NamedTemporaryFile(mode='w+', delete=False) as f:
