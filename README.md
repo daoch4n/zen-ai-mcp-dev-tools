@@ -51,7 +51,7 @@ You have development tools at your disposal. Use relevant tools from devtools MC
 
 `mcp-devtools` is designed to be used in conjunction with [MCP-SuperAssistant](https://github.com/srbhptl39/MCP-SuperAssistant/) or similar projects to extend online chat-based assistants such as ChatGPT, Google Gemini, Perplexity, Grok, Google AI Studio, OpenRouter Chat, DeepSeek, Kagi, T3 Chat with direct access to local files, git and cli tools.
 
-## MCP Server Configuration Example
+## MCP Server Configuration
 
 To integrate `mcp-devtools` with your AI assistant, add the following configuration to your MCP settings file:
 
