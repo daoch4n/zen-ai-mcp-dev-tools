@@ -623,7 +623,14 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
                 if opt.startswith("--"):
                     # Handle --option=value format
                     if "=" in opt:
-                        key, value = opt[2:].split("=", 1)
+                        key, value_str = opt[2:].split("=", 1)
+                        # Convert "true"/"false" strings to actual booleans
+                        if value_str.lower() == "true":
+                            value = True
+                        elif value_str.lower() == "false":
+                            value = False
+                        else:
+                            value = value_str
                         additional_opts[key.replace("-", "_")] = value
                     # Handle --option format (boolean flags)
                     else:
@@ -696,7 +703,7 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
             directory = arguments.get("directory", "")
             files = arguments.get("files", {})
             message = arguments.get("message", "Create files via Aider MCP")
-            git_commit = arguments.get("git_commit", True)
+            git_commit = bool(arguments.get("git_commit", True))
             
             # Verify directory exists
             directory_path = os.path.abspath(directory)
