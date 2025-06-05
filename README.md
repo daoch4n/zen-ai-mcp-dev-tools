@@ -1,5 +1,8 @@
 # mcp-devtools: multi-functional development tools MCP server over SSE
 
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/daoch4n/zen-ai-mcp-devtools/ci.yml?branch=main)](https://github.com/daoch4n/zen-ai-mcp-devtools)
+[![PyPI](https://img.shields.io/pypi/v/mcp-devtools)](https://pypi.org/project/mcp-devtools)
+
 - `mcp-devtools` offers a comprehensive suite of development tools, including extensive Git operations
   -  (`git_status`, `git_diff`, `git_commit`, `git_add`, `git_reset`, `git_log`, branch management, `git_checkout`, `git_show`, `git_apply_diff`, `git_read_file`, `git_stage_all`)
   -  general file manipulation (`search_and_replace`, `write_to_file`)
