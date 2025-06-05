@@ -5,7 +5,7 @@
 [![PyPI](https://img.shields.io/pypi/v/mcp-devtools)](https://pypi.org/project/mcp-devtools)
 
 - `mcp-devtools` offers a comprehensive suite of development tools, including extensive Git operations
-  -  (`git_status`, `git_diff_all`, `git_commit`, `git_reset`, `git_log`, branch management, `git_checkout`, `git_show`, `git_apply_diff`, `git_read_file`)
+  -  (`git_status`, `git_diff_all`, `git_stage_and_commit`, `git_reset`, `git_log`, branch management, `git_checkout`, `git_show`, `git_apply_diff`, `git_read_file`)
   -  general file manipulation (`search_and_replace`, `write_to_file`)
   -  ability to execute shell commands (`execute_command`)
 - All these functionalities are accessible via Server-Sent Events (SSE), making it a powerful and versatile server for various development needs.
@@ -147,7 +147,7 @@ When using the `ai_edit` tool (which leverages [Aider](https://github.com/Aider-
   }
   ```
 
-### `git_commit`
+### `git_stage_and_commit`
 - **Description:** Records changes to the repository. If `files` are provided, only those files will be staged and committed. If `files` are not provided, all changes in the working directory will be staged and committed.
 - **Input Schema:**
   ```json
