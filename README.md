@@ -63,6 +63,14 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 }
 ```
 
+## Aider Integration Environment Variables
+
+When using the `ai_edit` tool (which leverages `aider`), the following environment variables can be set to configure `aider`'s behavior. These are optional; if not set, `aider` will use its default behavior or the defaults configured within `mcp-devtools`.
+
+- `OPENAI_API_KEY`: Your OpenAI API key. Required for accessing OpenAI models.
+- `OPENAI_API_BASE`: (Optional) The base URL for the OpenAI API, useful for custom endpoints or proxying.
+- `AIDER_MODEL`: (Optional) Specifies the model to use with `aider`. If unset, `mcp-devtools` defaults to `gemini-2.5-flash-preview-05-20-refined-high`.
+
 ## Known Issues and Workarounds
 
 **Issue:**
@@ -76,7 +84,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 
 **Workarounds:**
 
-*    🤖 (most reliable) Instruct your AI assistant to delegate editing files to MCP-compatible coding agent by adding it as another MCP server, as it is more suitable for direct code manipulation, and let AI assistant act as task orchestrator that will write down plans and docs with `write_to_file` and delegate coding to specialized agent, then use `git_read_file` or `git_diff` to check up on agent's work, and manage commits and branches ([Aider](https://github.com/Aider-AI/aider) via [its MCP bridge](https://github.com/daoch4n/zen-ai-mcp-aider) is a good candidate to explore).
+*    🤖 (most reliable) Instruct your AI assistant to delegate editing files to MCP-compatible coding agent by adding it as another MCP server, as it is more suitable for direct code manipulation, and let AI assistant act as task orchestrator that will write down plans and docs with `write_to_file` and delegate coding to specialized agent, then use `git_read_file` or `git_diff` to check up on agent's work, and manage commits and branches ([Aider](https://github.com/Aider-AI/aider) via [its MCP bridge](https://github.com/sengokudaikon/aider-mcp-server) is already integrated as `ai_edit_files` tool).
 *    🖥️ (if you're feeling lucky) Instruct your AI assistant to craft a terminal command to edit problematic file via `execute_command` tool.
 
 ## Available Tools
@@ -448,3 +456,76 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     ]
   }
   ```
+
+### `ai_edit`
+- **Description:** AI pair programming tool for making targeted code changes using Aider. Use this tool to:
+  1. Implement new features or functionality in existing code
+  2. Add tests to an existing codebase
+  3. Fix bugs in code
+  4. Refactor or improve existing code
+  5. Make structural changes across multiple files
+
+  The tool requires:
+  - A repository path where the code exists
+  - A detailed message describing what changes to make. Please only describe one change per message. If you need to make multiple changes, please submit multiple requests.
+
+  Best practices for messages:
+  - Be specific about what files or components to modify
+  - Describe the desired behavior or functionality clearly
+  - Provide context about the existing codebase structure
+  - Include any constraints or requirements to follow
+
+  Examples of good messages:
+  - "Add unit tests for the Customer class in src/models/customer.rb testing the validation logic"
+  - "Implement pagination for the user listing API in the controllers/users_controller.js file"
+  - "Fix the bug in utils/date_formatter.py where dates before 1970 aren't handled correctly"
+  - "Refactor the authentication middleware in middleware/auth.js to use async/await instead of callbacks"
+- **Input Schema:**
+  ```json
+  {
+    "type": "object",
+    "properties": {
+      "repo_path": {
+        "type": "string"
+      },
+      "message": {
+        "type": "string"
+      },
+      "options": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "nullable": true
+      }
+    },
+    "required": [
+      "repo_path",
+      "message"
+    ]
+  }
+  ```
+
+### `aider_status`
+- **Description:** Check the status of Aider and its environment. Use this to:
+  1. Verify Aider is correctly installed
+  2. Check that API keys are set up
+  3. View the current configuration
+  4. Diagnose connection or setup issues
+- **Input Schema:**
+  ```json
+  {
+    "type": "object",
+    "properties": {
+      "repo_path": {
+        "type": "string"
+      },
+      "check_environment": {
+        "type": "boolean",
+        "default": true
+      }
+    },
+    "required": [
+      "repo_path"
+    ]
+  }
