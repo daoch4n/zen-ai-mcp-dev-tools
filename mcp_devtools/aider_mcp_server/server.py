@@ -644,7 +644,7 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent]:
             aider_options.update(additional_opts)
 # Filter out unsupported options that are not recognized by aider itself.
 # For example, --base-url is not a valid aider argument and must not be passed.
-            unsupported_options = ["base_url"] # Add other unsupported options here if needed
+            unsupported_options = ["base_url", "base-url"]  # Remove both underscore and dash variants
             for opt_key in unsupported_options:
                 if opt_key in aider_options:
                     logger.warning(f"Removing unsupported Aider option: --{opt_key.replace('_', '-')}")
