@@ -1,6 +1,6 @@
 # mcp-devtools: multi-functional development tools MCP server over SSE
 
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/daoch4n/zen-ai-mcp-devtools/ci.yml?branch=main)](https://github.com/daoch4n/zen-ai-mcp-devtools)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/daoch4n/zen-ai-mcp-devtools/python-package.yml.yml?branch=main)](https://github.com/daoch4n/zen-ai-mcp-devtools)
 [![PyPI](https://img.shields.io/pypi/v/mcp-devtools)](https://pypi.org/project/mcp-devtools)
 
 - `mcp-devtools` offers a comprehensive suite of development tools, including extensive Git operations
