@@ -446,7 +446,6 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 
   The tool requires:
   - A repository path where the code exists
-  - A list of files to be edited.
   - A detailed message describing what changes to make. Please only describe one change per message. If you need to make multiple changes, please submit multiple requests.
 
   Best practices for messages:
@@ -475,19 +474,32 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
         "type": "array",
         "items": {
           "type": "string"
-        }
+        },
+        "description": "A list of file paths (relative to the repository root) that Aider should operate on. This argument is mandatory."
       },
       "options": {
         "type": "array",
         "items": {
           "type": "string"
         },
-        "description": "An optional list of specific file paths (relative to the repository root) to stage before committing. If not provided, all changes will be staged."
+        "description": "Optional. A list of additional command-line options to pass directly to Aider (e.g., ['--model=gpt-4o', '--dirty-diff']). Each option should be a string."
+      },
+      "edit_format": {
+        "type": "string",
+        "enum": [
+          "diff",
+          "diff-fenced",
+          "udiff",
+          "whole"
+        ],
+        "default": "diff",
+        "description": "Optional. The format Aider should use for edits. Defaults to 'diff'. Options: 'diff', 'diff-fenced', 'udiff', 'whole'."
       }
     },
     "required": [
       "repo_path",
-      "message"
+      "message",
+      "files"
     ]
   }
   ```
