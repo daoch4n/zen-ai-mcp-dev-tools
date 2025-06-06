@@ -93,7 +93,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 ## Available Tools
 
 ### `git_status`
-- **Description:** Shows the working tree status.
+- **Description:** Shows the current status of the Git working tree, including untracked, modified, and staged files.
 - **Input Schema:**
   ```json
   {
@@ -110,7 +110,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   ```
 
 ### `git_diff_all`
-- **Description:** Shows all changes in the working directory (staged and unstaged, compared to HEAD).
+- **Description:** Shows all changes in the working directory, including both staged and unstaged modifications, compared to the HEAD commit. This provides a comprehensive view of all local changes.
 - **Input Schema:**
   ```json
   {
@@ -128,7 +128,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 
 
 ### `git_diff`
-- **Description:** Shows differences between branches or commits.
+- **Description:** Shows differences between the current working directory and a specified Git target (e.g., another branch, a specific commit hash, or a tag).
 - **Input Schema:**
   ```json
   {
@@ -149,7 +149,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   ```
 
 ### `git_stage_and_commit`
-- **Description:** Records changes to the repository. If `files` are provided, only those files will be staged and committed. If `files` are not provided, all changes in the working directory will be staged and committed.
+- **Description:** Stages specified files (or all changes if no files are specified) and then commits them to the repository with a given message. This creates a new commit in the Git history.
 - **Input Schema:**
   ```json
   {
@@ -166,13 +166,12 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
         "items": {
           "type": "string"
         },
-        "nullable": true
+        "description": "An optional list of specific file paths (relative to the repository root) to stage before committing. If not provided, all changes will be staged."
       }
     },
     "required": [
       "repo_path",
-      "message",
-      "files"
+      "message"
     ]
   }
   ```
@@ -180,7 +179,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 ### `aider_status`
 - **Description:** Check the status of Aider and its environment. Use this to:
   1. Verify Aider is correctly installed
-  2. Check that API keys are set up
+  2. Check API keys for OpenAI/Anthropic are set up
   3. View the current configuration
   4. Diagnose connection or setup issues
 - **Input Schema:**
@@ -203,7 +202,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   ```
 
 ### `git_reset`
-- **Description:** Unstages all staged changes.
+- **Description:** Unstages all currently staged changes in the repository, moving them back to the working directory without discarding modifications. This is equivalent to `git reset` without arguments.
 - **Input Schema:**
   ```json
   {
@@ -220,7 +219,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   ```
 
 ### `git_log`
-- **Description:** Shows the commit logs.
+- **Description:** Shows the commit history for the repository, listing recent commits with their hash, author, date, and message. The number of commits can be limited.
 - **Input Schema:**
   ```json
   {
@@ -241,7 +240,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   ```
 
 ### `git_create_branch`
-- **Description:** Creates a new branch from an optional base branch.
+- **Description:** Creates a new Git branch with the specified name. Optionally, you can base the new branch on an existing branch or commit, otherwise it defaults to the current active branch.
 - **Input Schema:**
   ```json
   {
@@ -266,7 +265,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   ```
 
 ### `git_checkout`
-- **Description:** Switches branches.
+- **Description:** Switches the current active branch to the specified branch name. This updates the working directory to reflect the state of the target branch.
 - **Input Schema:**
   ```json
   {
@@ -287,7 +286,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   ```
 
 ### `git_show`
-- **Description:** Shows the contents of a commit.
+- **Description:** Shows the metadata (author, date, message) and the diff of a specific commit. This allows inspection of changes introduced by a particular commit.
 - **Input Schema:**
   ```json
   {
@@ -308,7 +307,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   ```
 
 ### `git_apply_diff`
-- **Description:** Applies a diff to the working directory. Also outputs a diff of the changes made after successful application and `tsc --noEmit --allowJs` output for `.js`, `.mjs`, and `.ts` files to facilitate clean edits.
+- **Description:** Applies a given diff content (in unified diff format) to the working directory of the repository. This can be used to programmatically apply patches or changes.
 - **Input Schema:**
   ```json
   {
@@ -329,7 +328,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   ```
 
 ### `git_read_file`
-- **Description:** Reads the content of a file in the repository.
+- **Description:** Reads and returns the entire content of a specified file within the Git repository's working directory. The file path must be relative to the repository root.
 - **Input Schema:**
   ```json
   {
@@ -351,7 +350,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 
 
 ### `search_and_replace`
-- **Description:** Searches for a string or regex pattern in a file and replaces it with another string. It first attempts to use `sed` for the replacement. If `sed` fails or makes no changes, it falls back to a Python-based logic that first attempts a literal search and then a regex search if no literal matches are found. Also outputs a diff of the changes made after successful replacement and `tsc --noEmit --allowJs` output for `.js`, `.mjs`, and `.ts` files to facilitate clean edits.
+- **Description:** Searches for a specified string or regex pattern within a file and replaces all occurrences with a new string. Supports case-insensitive search and line-range restrictions. It attempts to use `sed` for efficiency, falling back to Python logic if `sed` fails or makes no changes.
 - **Input Schema:**
   ```json
   {
@@ -392,7 +391,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   ```
 
 ### `write_to_file`
-- **Description:** Writes content to a specified file, creating it if it doesn't exist or overwriting it if it does. Also outputs a diff of the changes made after successful write and `tsc --noemit --allowJs` output for `.js` `.mjs` `.ts` files to facilitate clean edits.
+- **Description:** Writes the provided content to a specified file within the repository. If the file does not exist, it will be created. If it exists, its content will be completely overwritten. Includes a check to ensure content was written correctly and generates a diff.
 - **Input Schema:**
   ```json
   {
@@ -417,7 +416,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   ```
 
 ### `execute_command`
-- **Description:** Executes a custom shell command. The `repo_path` parameter is used to set the current working directory (cwd) for the executed command.
+- **Description:** Executes an arbitrary shell command within the context of the specified repository's working directory. This tool can be used for tasks not covered by other specific Git tools, such as running build scripts, linters, or other system commands.
 - **Input Schema:**
   ```json
   {
@@ -449,7 +448,6 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   - A repository path where the code exists
   - A list of files to be edited.
   - A detailed message describing what changes to make. Please only describe one change per message. If you need to make multiple changes, please submit multiple requests.
-  Aider is always called with `--edit-format=udiff` to ensure consistent diff output.
 
   Best practices for messages:
   - Be specific about what files or components to modify
@@ -484,13 +482,12 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
         "items": {
           "type": "string"
         },
-        "nullable": true
+        "description": "An optional list of specific file paths (relative to the repository root) to stage before committing. If not provided, all changes will be staged."
       }
     },
     "required": [
       "repo_path",
-      "message",
-      "files"
+      "message"
     ]
   }
   ```
@@ -498,7 +495,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 ### `aider_status`
 - **Description:** Check the status of Aider and its environment. Use this to:
   1. Verify Aider is correctly installed
-  2. Check that API keys are set up
+  2. Check API keys for OpenAI/Anthropic are set up
   3. View the current configuration
   4. Diagnose connection or setup issues
 - **Input Schema:**
