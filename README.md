@@ -171,7 +171,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     },
     "required": [
       "repo_path",
-      "message"
+      "message",
       "files"
     ]
   }
@@ -197,9 +197,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
       }
     },
     "required": [
-      "repo_path",
-      "message",
-      "files"
+      "repo_path"
     ]
   }
   ```
@@ -491,7 +489,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     },
     "required": [
       "repo_path",
-      "message"
+      "message",
       "files"
     ]
   }
@@ -517,9 +515,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
       }
     },
     "required": [
-      "repo_path",
-      "message",
-      "files"
+      "repo_path"
     ]
   }
   ```
