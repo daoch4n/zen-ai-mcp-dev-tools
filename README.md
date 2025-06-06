@@ -100,7 +100,8 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     "type": "object",
     "properties": {
       "repo_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The absolute path to the Git repository's working directory."
       }
     },
     "required": [
@@ -117,7 +118,8 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     "type": "object",
     "properties": {
       "repo_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The absolute path to the Git repository's working directory."
       }
     },
     "required": [
@@ -135,10 +137,12 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     "type": "object",
     "properties": {
       "repo_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The absolute path to the Git repository's working directory."
       },
       "target": {
-        "type": "string"
+        "type": "string",
+        "description": "The target (e.g., branch name, commit hash, tag) to diff against. For example, 'main', 'HEAD~1', or a full commit SHA."
       }
     },
     "required": [
@@ -156,10 +160,12 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     "type": "object",
     "properties": {
       "repo_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The absolute path to the Git repository's working directory."
       },
       "message": {
-        "type": "string"
+        "type": "string",
+        "description": "The commit message for the changes."
       },
       "files": {
         "type": "array",
@@ -185,7 +191,8 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     "type": "object",
     "properties": {
       "repo_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The absolute path to the Git repository's working directory."
       }
     },
     "required": [
@@ -202,11 +209,13 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     "type": "object",
     "properties": {
       "repo_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The absolute path to the Git repository's working directory."
       },
       "max_count": {
         "type": "integer",
-        "default": 10
+        "default": 10,
+        "description": "The maximum number of commit entries to retrieve. Defaults to 10."
       }
     },
     "required": [
@@ -223,10 +232,12 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     "type": "object",
     "properties": {
       "repo_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The absolute path to the Git repository's working directory."
       },
       "branch_name": {
-        "type": "string"
+        "type": "string",
+        "description": "The name of the new branch to create."
       },
       "base_branch": {
         "type": "string",
@@ -249,10 +260,12 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     "type": "object",
     "properties": {
       "repo_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The absolute path to the Git repository's working directory."
       },
       "branch_name": {
-        "type": "string"
+        "type": "string",
+        "description": "The name of the branch to checkout."
       }
     },
     "required": [
@@ -270,10 +283,12 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     "type": "object",
     "properties": {
       "repo_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The absolute path to the Git repository's working directory."
       },
       "revision": {
-        "type": "string"
+        "type": "string",
+        "description": "The commit hash or reference (e.g., 'HEAD', 'main', 'abc1234') to show details for."
       }
     },
     "required": [
@@ -291,10 +306,12 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     "type": "object",
     "properties": {
       "repo_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The absolute path to the Git repository's working directory."
       },
       "diff_content": {
-        "type": "string"
+        "type": "string",
+        "description": "The diff content string to apply to the repository. This should be in a unified diff format."
       }
     },
     "required": [
@@ -312,10 +329,12 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     "type": "object",
     "properties": {
       "repo_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The absolute path to the Git repository's working directory."
       },
       "file_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The path to the file to read, relative to the repository's working directory."
       }
     },
     "required": [
@@ -334,20 +353,25 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     "type": "object",
     "properties": {
       "repo_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The absolute path to the Git repository's working directory."
       },
       "file_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The path to the file to modify, relative to the repository's working directory."
       },
       "search_string": {
-        "type": "string"
+        "type": "string",
+        "description": "The string or regex pattern to search for within the file."
       },
       "replace_string": {
-        "type": "string"
+        "type": "string",
+        "description": "The string to replace all matches of the search string with."
       },
       "ignore_case": {
         "type": "boolean",
-        "default": false
+        "default": false,
+        "description": "If true, the search will be case-insensitive. Defaults to false."
       },
       "start_line": {
         "type": "integer",
@@ -377,13 +401,16 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     "type": "object",
     "properties": {
       "repo_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The absolute path to the Git repository's working directory."
       },
       "file_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The path to the file to write to, relative to the repository's working directory. The file will be created if it doesn't exist, or overwritten if it does."
       },
       "content": {
-        "type": "string"
+        "type": "string",
+        "description": "The string content to write to the specified file."
       }
     },
     "required": [
@@ -402,10 +429,12 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     "type": "object",
     "properties": {
       "repo_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The absolute path to the directory where the command should be executed."
       },
       "command": {
-        "type": "string"
+        "type": "string",
+        "description": "The shell command string to execute (e.g., 'ls -l', 'npm install')."
       }
     },
     "required": [
@@ -444,10 +473,12 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     "type": "object",
     "properties": {
       "repo_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The absolute path to the Git repository's working directory where the AI edit should be performed."
       },
       "message": {
-        "type": "string"
+        "type": "string",
+        "description": "A detailed natural language message describing the code changes to make. Be specific about files, desired behavior, and any constraints."
       },
       "files": {
         "type": "array",
