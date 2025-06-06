@@ -25,6 +25,8 @@
 
 ## Prerequisites
 
+- Python 3.12
+
 ```bash
 pip install uv
 ```
