@@ -109,6 +109,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   }
   ```
 
+
 ### `git_diff_all`
 - **Description:** Shows all changes in the working directory, including both staged and unstaged modifications, compared to the HEAD commit. This provides a comprehensive view of all local changes.
 - **Input Schema:**
@@ -126,7 +127,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     ]
   }
   ```
-
+## Available Tools
 
 ### `git_diff`
 - **Description:** Shows differences between the current working directory and a specified Git target (e.g., another branch, a specific commit hash, or a tag).
