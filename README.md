@@ -456,6 +456,12 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   - A repository path where the code exists
   - A detailed message describing what changes to make. Please only describe one change per message. If you need to make multiple changes, please submit multiple requests.
 
+  **Edit Format Selection:**
+  If the `edit_format` option is not explicitly provided, the default is selected based on the model name:
+  - If the model includes `gemini`, defaults to `diff-fenced`
+  - If the model includes `gpt`, defaults to `udiff`
+  - Otherwise, defaults to `diff`
+
   Best practices for messages:
   - Be specific about what files or components to modify
   - Describe the desired behavior or functionality clearly
