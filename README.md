@@ -71,7 +71,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 
 ## Aider Integration 
 
-When using the `ai_edit` tool (which leverages [Aider](https://github.com/Aider-AI/aider)), please refer to the [Aider Configuration documentation](docs/aider_config.md).
+When using the `ai_edit` tool (which leverages `Aider`), please refer to the [Aider Configuration documentation](docs/aider_config.md).
 
 
 ## Known Issues and Workarounds
@@ -87,7 +87,7 @@ When using the `ai_edit` tool (which leverages [Aider](https://github.com/Aider-
 
 **Workarounds:**
 
-*    🤖 (most reliable) Instruct your AI assistant to delegate editing files to MCP-compatible coding agent by adding it as another MCP server, as it is more suitable for direct code manipulation, and let AI assistant act as task orchestrator that will write down plans and docs with `write_to_file` and delegate coding to specialized agent, then use `git_read_file` or `git_diff` to check up on agent's work, and manage commits and branches ([Aider](https://github.com/Aider-AI/aider) via [its MCP bridge](https://github.com/sengokudaikon/aider-mcp-server) is already integrated as `ai_edit_files` tool).
+*    🤖 (most reliable) Instruct your AI assistant to delegate editing files to MCP-compatible coding agent by adding it as another MCP server, as it is more suitable for direct code manipulation, and let AI assistant act as task orchestrator that will write down plans and docs with `write_to_file` and delegate coding to specialized agent, then use `git_read_file` or `git_diff` to check up on agent's work, and manage commits and branches `Aider` via [its MCP bridge](https://github.com/sengokudaikon/aider-mcp-server) is already integrated as `ai_edit` tool).
 *    🖥️ (if you're feeling lucky) Instruct your AI assistant to craft a terminal command to edit problematic file via `execute_command` tool.
 
 ## Available Tools
