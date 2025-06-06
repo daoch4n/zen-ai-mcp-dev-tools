@@ -176,6 +176,33 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   }
   ```
 
+### `aider_status`
+- **Description:** Check the status of Aider and its environment. Use this to:
+  1. Verify Aider is correctly installed
+  2. Check that API keys are set up
+  3. View the current configuration
+  4. Diagnose connection or setup issues
+- **Input Schema:**
+  ```json
+  {
+    "type": "object",
+    "properties": {
+      "repo_path": {
+        "type": "string"
+      },
+      "check_environment": {
+        "type": "boolean",
+        "default": true
+      }
+    },
+    "required": [
+      "repo_path",
+      "message",
+      "files"
+    ]
+  }
+  ```
+
 ### `git_reset`
 - **Description:** Unstages all staged changes.
 - **Input Schema:**
@@ -421,7 +448,9 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 
   The tool requires:
   - A repository path where the code exists
+  - A list of files to be edited.
   - A detailed message describing what changes to make. Please only describe one change per message. If you need to make multiple changes, please submit multiple requests.
+  Aider is always called with `--edit-format=udiff` to ensure consistent diff output.
 
   Best practices for messages:
   - Be specific about what files or components to modify
@@ -445,6 +474,12 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
       "message": {
         "type": "string"
       },
+      "files": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
       "options": {
         "type": "array",
         "items": {
@@ -456,6 +491,33 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     "required": [
       "repo_path",
       "message"
+    ]
+  }
+  ```
+
+### `aider_status`
+- **Description:** Check the status of Aider and its environment. Use this to:
+  1. Verify Aider is correctly installed
+  2. Check that API keys are set up
+  3. View the current configuration
+  4. Diagnose connection or setup issues
+- **Input Schema:**
+  ```json
+  {
+    "type": "object",
+    "properties": {
+      "repo_path": {
+        "type": "string"
+      },
+      "check_environment": {
+        "type": "boolean",
+        "default": true
+      }
+    },
+    "required": [
+      "repo_path",
+      "message",
+      "files"
     ]
   }
   ```
