@@ -88,8 +88,11 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 
 **Workarounds:**
 
-*    🤖 (most reliable) Instruct your AI assistant to delegate editing files to MCP-compatible coding agent by adding it as another MCP server, as it is more suitable for direct code manipulation, and let AI assistant act as task orchestrator that will write down plans and docs with `write_to_file` and delegate coding to specialized agent, then use `git_read_file` or `git_diff` to check up on agent's work, and manage commits and branches `Aider` via [its MCP bridge](https://github.com/sengokudaikon/aider-mcp-server) is already integrated as `ai_edit` tool).
+*    🤖 (most reliable) Instruct your AI assistant to delegate editing files to MCP-compatible coding agent by using `ai_edit` tool instead, as it is more suitable for direct code manipulation, automatically commits changes and produces resulting diff as tool output, and let AI assistant act as task orchestrator that will write down plans and docs with `write_to_file` tool then delegate actual coding to specialized agent, get its report (diff) as tool call result, use `git_read_file` tool to double check agent's work, and manage commits and branches (`ai_edit` tool basically integrates `Aider` via some [its MCP bridge](https://github.com/sengokudaikon/aider-mcp-server) logic ported to mcp-devtools).
 *    🖥️ (if you're feeling lucky) Instruct your AI assistant to craft a terminal command to edit problematic file via `execute_command` tool.
+
+## Available Tools
+
 
 ### `git_status`
 - **Description:** Shows the current status of the Git working tree, including untracked, modified, and staged files.
@@ -127,7 +130,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     ]
   }
   ```
-## Available Tools
+
 
 ### `git_diff`
 - **Description:** Shows differences between the current working directory and a specified Git target (e.g., another branch, a specific commit hash, or a tag).
