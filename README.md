@@ -92,6 +92,8 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 
 ## Available Tools
 
+For a comprehensive overview of all tools, their arguments, and detailed descriptions, please refer to the [Server Module Documentation](docs/server_documentation.md).
+
 ### `git_status`
 - **Description:** Shows the current status of the Git working tree, including untracked, modified, and staged files.
 - **Input Schema:**
