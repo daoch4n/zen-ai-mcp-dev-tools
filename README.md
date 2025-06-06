@@ -176,30 +176,6 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   }
   ```
 
-### `aider_status`
-- **Description:** Check the status of Aider and its environment. Use this to:
-  1. Verify Aider is correctly installed
-  2. Check API keys for OpenAI/Anthropic are set up
-  3. View the current configuration
-  4. Diagnose connection or setup issues
-- **Input Schema:**
-  ```json
-  {
-    "type": "object",
-    "properties": {
-      "repo_path": {
-        "type": "string"
-      },
-      "check_environment": {
-        "type": "boolean",
-        "default": true
-      }
-    },
-    "required": [
-      "repo_path"
-    ]
-  }
-  ```
 
 ### `git_reset`
 - **Description:** Unstages all currently staged changes in the repository, moving them back to the working directory without discarding modifications. This is equivalent to `git reset` without arguments.
