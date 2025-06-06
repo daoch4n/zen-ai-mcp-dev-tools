@@ -446,7 +446,6 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 
   The tool requires:
   - A repository path where the code exists
-  - A list of files to be edited.
   - A detailed message describing what changes to make. Please only describe one change per message. If you need to make multiple changes, please submit multiple requests.
 
   Best practices for messages:
