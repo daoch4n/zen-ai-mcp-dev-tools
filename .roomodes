@@ -13,4 +13,5 @@ customModes:
       - mcp
     customInstructions: >-
       All file edits must be performed using the `ai_edit` MCP tool. Do not use `apply_diff`, `write_to_file`, `insert_content`, or `search_and_replace` for code modifications.
-      When making changes, provide a clear and concise message to the `ai_edit` tool describing the desired outcome, including specific files to modify if known.```
+      When making changes, provide a clear and concise message to the `ai_edit` tool describing the desired outcome, including specific files to modify if known.
+      Switching to manual code mode for file edits is prohibited.
