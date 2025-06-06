@@ -7,11 +7,18 @@
 - 🔧 `mcp-devtools` offers a comprehensive suite of development tools:
   -  🎋 Git operations (`git_status`, `git_diff`, `git_diff_all`, `git_stage_and_commit`, `git_reset`, `git_log`, `git_create_branch`, `git_reset` `git_checkout`, `git_show`, `git_apply_diff`, `git_read_file`)
   -  📂 General file editing (`search_and_replace`, `write_to_file`)
-  -  🖥️ Shell commands execution (`execute_command`)
+  -  🖥️ Terminal commands execution (`execute_command`)
   -  🤖 AI-assisted coding with [Aider](https://github.com/Aider-AI/aider) (`ai_edit` (`aider_status` for `Aider` systems ready checks ))
 - 🌐 All these functions are accessible via Server-Sent Events (SSE), making it a powerful and versatile server for various development needs.
 - 🛡️ Filesystem access boundaries are maintained via passing `repo_path` to every file command, so AI assistant only has read/write access to files in the current workspace (or whatever it decides to pass as `repo_path` , make sure system prompt is solid on that part).
 - ⚠️ Execise extreme caution with auto-allowing `execute_command` tool or at least don't leave AI assistant unattended when doing so. MCP server won't stop assistant from `execute_command` rm -rf ~/*
+
+## Use Cases
+
+- 🌐 Use it with [MCP-SuperAssistant](https://github.com/srbhptl39/MCP-SuperAssistant/) or similar projects to extend online chat-based assistants such as ChatGPT, Google Gemini, Perplexity, Grok, Google AI Studio, OpenRouter Chat, DeepSeek, Kagi, T3 Chat with direct access to local files, git, terminal commands execution and AI-assisted file editing capabilities.
+- 🦘 Use it with [Roo Code](https://github.com/RooCodeInc/Roo-Code) or similar projects to boost IDE code editors like Cursor, Windsurf or VSCode extensions like Roo, Cline, Copilot or Augment with intuitive Git management and AI-assisted file editing capabilities and say goodbye to those pesky diff application failures wasting your API credits or tool calls or `Roo having trouble...` breaking your carefully engineered automation workflows. Aider seems to get diffs right!
+  - For Roo Code, place [.roomodes](https://github.com/daoch4n/zen-ai-mcp-devtools/blob/main/.roomodes) into your repo root and Roo will pick it up as `🤖 AI Code` mode that `🪃 Orchestrator` mode can call.
+
 
 ## Prerequisites
 
@@ -48,10 +55,6 @@ cd zen-ai-mcp-devtools
 You have development tools at your disposal. Use relevant tools from devtools MCP server for git management, file operations, and terminal access. When using any tool from devtools, always provide the current repository full current working directory path as the 'repo_path' option, do not set it to any other folder. 'repo_path' must be explicitly asked from user in beginning of conversation. When using execute_command tool, the current working directory will be set to repo_path provided. When using it for file manipulations, make sure to pass full path in the terminal command including repo_path prefix as manipulated file path.
 ```
 
-## Integration
-
-`mcp-devtools` is designed to be used in conjunction with [MCP-SuperAssistant](https://github.com/srbhptl39/MCP-SuperAssistant/) or similar projects to extend online chat-based assistants such as ChatGPT, Google Gemini, Perplexity, Grok, Google AI Studio, OpenRouter Chat, DeepSeek, Kagi, T3 Chat with direct access to local files, git and cli tools.
-
 ## MCP Server Configuration
 
 To integrate `mcp-devtools` with your AI assistant, add the following configuration to your MCP settings file:
@@ -69,7 +72,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 }
 ```
 
-## Aider Integration 
+## AI-assisted File Editing 
 
 When using the `ai_edit` tool (which leverages `Aider`), please refer to the [Aider Configuration documentation](docs/aider_config.md).
 
