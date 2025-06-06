@@ -15,9 +15,9 @@
 
 ## Use Cases
 
-- 🌐 Use it with [MCP-SuperAssistant](https://github.com/srbhptl39/MCP-SuperAssistant/) or similar projects to extend online chat-based assistants such as ChatGPT, Google Gemini, Perplexity, Grok, Google AI Studio, OpenRouter Chat, DeepSeek, Kagi, T3 Chat with direct access to local files, git, terminal commands execution and AI-assisted file editing capabilities.
-- 🦘 Use it with [Roo Code](https://github.com/RooCodeInc/Roo-Code) or similar projects to boost IDE code editors like Cursor, Windsurf or VSCode extensions like Roo, Cline, Copilot or Augment with intuitive Git management and AI-assisted file editing capabilities and say goodbye to those pesky diff application failures wasting your API credits or tool calls or `Roo having trouble...` breaking your carefully engineered automation workflows. Aider seems to get diffs right!
-  - For Roo Code, place [.roomodes](https://github.com/daoch4n/zen-ai-mcp-devtools/blob/main/.roomodes) into your repo root and Roo will pick it up as `🤖 AI Code` mode that `🪃 Orchestrator` mode can call.
+- 🌐 Use it to extend online chat-based assistants such as ChatGPT, Google Gemini, Perplexity, Grok, Google AI Studio, OpenRouter Chat, DeepSeek, Kagi, T3 Chat with direct access to local files, git, terminal commands execution and AI-assisted file editing capabilities via [MCP-SuperAssistant](https://github.com/srbhptl39/MCP-SuperAssistant/) or similar projects.
+- 🦘 Use it to boost code editors like Cursor, Windsurf or VSCode extensions like Roo Code, Cline, Copilot or Augment with intuitive Git management and AI-assisted file editing capabilities and say goodbye to those pesky diff application failures wasting your tool calls or `Roo having trouble...` breaking your carefully engineered automation workflows. Aider seems to get diffs right!
+  - For [Roo Code](https://github.com/RooCodeInc/Roo-Code), place [.roomodes](https://github.com/daoch4n/zen-ai-mcp-devtools/blob/main/.roomodes) into your repo root and Roo will pick it up as `🤖 AI Code` mode that `🪃 Orchestrator` mode can call.
 
 
 ## Prerequisites
