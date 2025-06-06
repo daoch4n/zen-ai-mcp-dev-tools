@@ -230,7 +230,8 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
       },
       "base_branch": {
         "type": "string",
-        "nullable": true
+        "nullable": true,
+        "description": "Optional. The name of the branch or commit hash to base the new branch on. If not provided, the new branch will be based on the current active branch."
       }
     },
     "required": [
@@ -350,11 +351,13 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
       },
       "start_line": {
         "type": "integer",
-        "nullable": true
+        "nullable": true,
+        "description": "Optional. The 1-based starting line number for the search and replace operation (inclusive). If not provided, search starts from the beginning of the file."
       },
       "end_line": {
         "type": "integer",
-        "nullable": true
+        "nullable": true,
+        "description": "Optional. The 1-based ending line number for the search and replace operation (inclusive). If not provided, search continues to the end of the file."
       }
     },
     "required": [
