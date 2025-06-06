@@ -5,7 +5,7 @@
 [![PyPI](https://img.shields.io/pypi/v/mcp-devtools)](https://pypi.org/project/mcp-devtools)
 
 - 🔧 `mcp-devtools` offers a comprehensive suite of development tools:
-- 📄 For detailed overview of all tools, their arguments, and descriptions, please refer to the [Server Module Documentation](docs/server_documentation.md). 
+- 📄 For detailed overview of all tools, their arguments, and descriptions, please refer to the [Server Module Documentation](docs/server_documentation.md) or [Available Tools section](https://github.com/daoch4n/zen-ai-mcp-devtools/blob/main/README.md#available-tools). 
   -  🎋 Git management operations (`git_status`, `git_stage_and_commit`, `git_diff`, `git_diff_all`, `git_log`, `git_create_branch`, `git_reset` `git_checkout`, `git_show`)
   -  📁 Git file operations (`git_read_file`, `git_apply_diff`)
   -  📂 Direct file operations (`search_and_replace`, `write_to_file`)
