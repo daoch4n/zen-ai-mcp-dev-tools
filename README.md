@@ -9,6 +9,7 @@
   -  📂 General file editing (`search_and_replace`, `write_to_file`)
   -  🖥️ Terminal commands execution (`execute_command`)
   -  🤖 AI-assisted coding with [Aider](https://github.com/Aider-AI/aider) (`ai_edit` (`aider_status` for `Aider` systems ready checks ))
+  -  - When using the `ai_edit` tool please refer to the [Aider Configuration documentation](docs/aider_config.md).
 - 🌐 All these functions are accessible via Server-Sent Events (SSE), making it a powerful and versatile server for various development needs.
 - 🛡️ Filesystem access boundaries are maintained via passing `repo_path` to every file command, so AI assistant only has read/write access to files in the current workspace (or whatever it decides to pass as `repo_path` , make sure system prompt is solid on that part).
 - ⚠️ Execise extreme caution with auto-allowing `execute_command` tool or at least don't leave AI assistant unattended when doing so. MCP server won't stop assistant from `execute_command` rm -rf ~/*
@@ -71,11 +72,6 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
   }
 }
 ```
-
-## AI-assisted File Editing 
-
-When using the `ai_edit` tool (which leverages `Aider`), please refer to the [Aider Configuration documentation](docs/aider_config.md).
-
 
 ## Known Issues and Workarounds
 
