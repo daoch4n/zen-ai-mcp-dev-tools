@@ -68,7 +68,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
       "url": "http://127.0.0.1:1337/sse",
       "disabled": false,
       "alwaysAllow": [],
-      "timeout": 300
+      "timeout": 999
     }
   }
 }
