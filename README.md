@@ -526,11 +526,13 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
     "type": "object",
     "properties": {
       "repo_path": {
-        "type": "string"
+        "type": "string",
+        "description": "The absolute path to the Git repository or working directory to check Aider's status within."
       },
       "check_environment": {
         "type": "boolean",
-        "default": true
+        "default": true,
+        "description": "If true, the tool will also check Aider's configuration, environment variables, and Git repository details. Defaults to true."
       }
     },
     "required": [
