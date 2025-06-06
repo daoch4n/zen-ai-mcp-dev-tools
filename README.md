@@ -1,17 +1,17 @@
-# mcp-devtools: multi-functional development tools MCP server over SSE
+# ⚙️ mcp-devtools: multi-functional development tools MCP server over SSE
 
 [![GitHub repository](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/daoch4n/zen-ai-mcp-devtools)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/daoch4n/zen-ai-mcp-devtools/python-package.yml?branch=main)](https://github.com/daoch4n/zen-ai-mcp-devtools/actions/workflows/python-package.yml)
 [![PyPI](https://img.shields.io/pypi/v/mcp-devtools)](https://pypi.org/project/mcp-devtools)
 
-- `mcp-devtools` offers a comprehensive suite of development tools, including extensive Git operations
-  -  (`git_status`, `git_diff_all`, `git_stage_and_commit`, `git_reset`, `git_log`, branch management, `git_checkout`, `git_show`, `git_apply_diff`, `git_read_file`)
-  -  general file manipulation (`search_and_replace`, `write_to_file`)
-  -  ability to execute shell commands (`execute_command`)
-  -  and AI-assisted coding tools (`ai_edit`, `aider_status`)
-- All these functionalities are accessible via Server-Sent Events (SSE), making it a powerful and versatile server for various development needs.
-- Filesystem access boundaries are maintained via passing `repo_path` to every file command, so AI assistant only has read/write access to files in the current workspace (or whatever it decides to pass as `repo_path` , make sure system prompt is solid on that part).
-- It also won't stop assistant from `execute_command` rm -rf ~/* , so execise extreme caution with auto-allowing command execution tool or at least don't leave assistant unattended when doing so.
+- 🔧 `mcp-devtools` offers a comprehensive suite of development tools:
+  -  🎋 Git operations (`git_status`, `git_diff`, `git_diff_all`, `git_stage_and_commit`, `git_reset`, `git_log`, `git_create_branch`, `git_reset` `git_checkout`, `git_show`, `git_apply_diff`, `git_read_file`)
+  -  📂 General file editing (`search_and_replace`, `write_to_file`)
+  -  🖥️ Shell commands execution (`execute_command`)
+  -  🤖 AI-assisted coding (`ai_edit` (`aider_status` for `Aider` systems ready checks ))
+- 🌐 All these functions are accessible via Server-Sent Events (SSE), making it a powerful and versatile server for various development needs.
+- 🛡️ Filesystem access boundaries are maintained via passing `repo_path` to every file command, so AI assistant only has read/write access to files in the current workspace (or whatever it decides to pass as `repo_path` , make sure system prompt is solid on that part).
+- ⚠️ Execise extreme caution with auto-allowing `execute_command` tool or at least don't leave AI assistant unattended when doing so. MCP server won't stop assistant from `execute_command` rm -rf ~/*
 
 ## Prerequisites
 
