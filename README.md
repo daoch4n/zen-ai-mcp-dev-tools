@@ -5,12 +5,13 @@
 [![PyPI](https://img.shields.io/pypi/v/mcp-devtools)](https://pypi.org/project/mcp-devtools)
 
 - 🔧 `mcp-devtools` offers a comprehensive suite of development tools:
+- 📄 For detailed overview of all tools, their arguments, and descriptions, please refer to the [Server Module Documentation](docs/server_documentation.md). 
   -  🎋 Git management operations (`git_status`, `git_stage_and_commit`, `git_diff`, `git_diff_all`, `git_log`, `git_create_branch`, `git_reset` `git_checkout`, `git_show`)
   -  📁 Git file operations (`git_read_file`, `git_apply_diff`)
   -  📂 Direct file operations (`search_and_replace`, `write_to_file`)
   -  🖥️ Terminal commands execution (`execute_command`)
   -  🤖 AI-assisted file operations using [Aider](https://github.com/Aider-AI/aider) (`ai_edit` (`aider_status` for systems ready check ))
-    <br> ℹ️ When using the `ai_edit` tool please refer to the [Aider Configuration documentation](docs/aider_config.md).
+    <br> ℹ️ When using the `ai_edit` tool, please refer to the [Aider Configuration documentation](docs/aider_config.md) for detailed instructions.
 - 🌐 All these functions are accessible via Server-Sent Events (SSE), making it a powerful and versatile server for various development needs.
 - 🛡️ Filesystem access boundaries are maintained via passing `repo_path` to every file command, so AI assistant only has read/write access to files in the current workspace (or whatever it decides to pass as `repo_path` , make sure system prompt is solid on that part).
   <br> ⚠️ Execise extreme caution with auto-allowing `execute_command` tool or at least don't leave AI assistant unattended when doing so. MCP server won't stop assistant from `execute_command` rm -rf ~/*
@@ -89,10 +90,6 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 
 *    🤖 (most reliable) Instruct your AI assistant to delegate editing files to MCP-compatible coding agent by adding it as another MCP server, as it is more suitable for direct code manipulation, and let AI assistant act as task orchestrator that will write down plans and docs with `write_to_file` and delegate coding to specialized agent, then use `git_read_file` or `git_diff` to check up on agent's work, and manage commits and branches `Aider` via [its MCP bridge](https://github.com/sengokudaikon/aider-mcp-server) is already integrated as `ai_edit` tool).
 *    🖥️ (if you're feeling lucky) Instruct your AI assistant to craft a terminal command to edit problematic file via `execute_command` tool.
-
-## Available Tools
-
-For a comprehensive overview of all tools, their arguments, and detailed descriptions, please refer to the [Server Module Documentation](docs/server_documentation.md).
 
 ### `git_status`
 - **Description:** Shows the current status of the Git working tree, including untracked, modified, and staged files.
