@@ -5,40 +5,60 @@
 [![PyPI](https://img.shields.io/pypi/v/mcp-devtools)](https://pypi.org/project/mcp-devtools)
 
 - 🔧 `mcp-devtools` offers a comprehensive suite of development tools:
-- 📄 For detailed overview of all tools, their arguments, and descriptions, please refer to the [Server Module Documentation](docs/server_documentation.md) or [Available Tools section](#available-tools).
+- 📄 For detailed overview of all tools, their arguments, and descriptions, please refer to [Available Tools](#%E2%84%B9%EF%B8%8F-available-tools).
   -  🎋 Git management operations (`git_status`, `git_stage_and_commit`, `git_diff`, `git_diff_all`, `git_log`, `git_create_branch`, `git_reset` `git_checkout`, `git_show`)
   -  📁 Git file operations (`git_read_file`, `git_apply_diff`)
   -  📂 Direct file operations (`search_and_replace`, `write_to_file`)
-  -  🖥️ Terminal commands execution (`execute_command`)
+  -  🖥️ Terminal commands execution (`execute_command`), please review [Automation-Related Security Considerations](#-automation-related-security-considerations).
   -  🤖 AI-assisted file operations using [Aider](https://github.com/Aider-AI/aider) (`ai_edit` (`aider_status` for systems ready check ))
     <br> ℹ️ When using the `ai_edit` tool, please refer to the [Aider Configuration documentation](docs/aider_config.md) for detailed instructions.
-- 🌐 All these functions are accessible via Server-Sent Events (SSE), making it a powerful and versatile server for various development needs.
-- 🛡️ Filesystem access boundaries are maintained via passing `repo_path` to every file command, so AI assistant only has read/write access to files in the current workspace (or whatever it decides to pass as `repo_path` , make sure system prompt is solid on that part).
-  <br> ⚠️ Execise extreme caution with auto-allowing `execute_command` tool or at least don't leave AI assistant unattended when doing so. MCP server won't stop assistant from `execute_command` rm -rf ~/*
 
-## Use Cases
+## ⛎ Use Cases
 
 - 🌐 Use it to extend online chat-based assistants such as ChatGPT, Google Gemini or AI Studio, Perplexity, Grok, OpenRouter Chat, DeepSeek, Kagi, T3 Chat with direct access to local files, git, terminal commands execution and AI-assisted file editing capabilities via [MCP-SuperAssistant](https://github.com/srbhptl39/MCP-SuperAssistant/) or similar projects.
-- 🦘 Use it to boost code editors like Cursor, Windsurf or VSCode extensions like Roo Code, Cline, Copilot or Augment with intuitive Git management and AI-assisted file editing capabilities and say goodbye to those pesky diff application failures wasting your tool calls or `Roo having trouble...` breaking your carefully engineered automation workflows. Aider seems to get diffs right!
-  - For [Roo Code](https://github.com/RooCodeInc/Roo-Code), place [.roomodes](https://github.com/daoch4n/zen-ai-mcp-devtools/blob/main/.roomodes) into your repo root and Roo will pick it up as `🤖 AI Code` mode that `🪃 Orchestrator` mode can call.
+- 👩🏻‍💻 Use it to boost code editors like Cursor, Windsurf or VSCode extensions like Roo Code, Cline, Copilot or Augment with intuitive Git management and AI-assisted file editing capabilities and say goodbye to those pesky diff application failures wasting your time or `Roo having trouble...` breaking your carefully engineered automation workflows. Aider seems to get diffs right! (if it still doesn't work quite well, try to find perfect way for your AI model by explicitly passing different `edit_format` [parameters](#ai_edit) to `ai_edit` tool):
+  - `unidiff` seems to work better with GPT
+  - `diff-fenced`  performs best with Gemini
+  - `diff` provides balanced quick results on all models
+  - `whole` is the slowest but most reliable option as it simply overwrites file
+
+## 🦘 [Agentic-Driven Workflow](https://github.com/daoch4n/research/blob/main/agentic-driven-workflows.md) with Roo
+
+https://github.com/user-attachments/assets/4d218e5e-906c-4d24-abc3-09ab0acdc1d0
+
+  - For [Roo Code](https://github.com/RooCodeInc/Roo-Code), place the [.roomodes](https://github.com/daoch4n/zen-ai-mcp-devtools/blob/main/.roomodes) file into your repo root to experience automated 2-level deep [nested agent execution](https://www.perplexity.ai/search/nested-agent-execution-BsD4hcqjTdKlEUKJLnv9.g) flow:
+    - `🤖 AI Code` and `👾 AI Debug` modes (fast models like Gemini Flash 2.5 / GPT 4.1 work well here) delegate all code changes to Aider via `ai_edit` tool and enforce strict MCP tool schema compliance and review of Aider agent work with automated agent redelegation on unsatisfactory or missing results by checking diff (or stdout) output of `ai_edit` tool call.
+    - `👽 AI Architect` and `🔬 AI Researcher` modes (try using deep reasoning model like DeepSeek R1 / Gemini Pro 2.5 / OpenAI o1/o3/o4mini for `👽 AI Architect`, and internet-connected model like Perplexity Sonar for `🔬 AI Researcher`)
+    - `🛸 AI Orchestrator` mode (deep reasoning model also recommended) coordinates all of the above by breaking complex tasks into logical subtasks and delegates each subtask using the Roo Code native `new_task` tool, providing comprehensive, context-rich instructions for each specialized AI mode. For questions or clarifications, it uses the default `❓ Ask` mode. Each subtask receives explicit instructions to only perform the outlined work and signal completion using native `attempt_completion`. The orchestrator tracks all subtasks, synthesizes results, and suggests workflow improvements to reach near complete automation of your dev workflow (requires thoughtful [prompt engineering](https://github.com/daoch4n/research/blob/main/prompt-engineering-in-agentic-driven-software-development-research.md)).
 
 
-## Prerequisites
+## 1️⃣ Prerequisites
 
-- Python 3.12
+- Python 3.12, [uv](https://github.com/astral-sh/uv)
+
+### 🐧 Linux/macOS
 
 ```bash
-pip install uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-## Running from pypi
+### 🪟 Windows
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+## 2️⃣ Usage
+
+### 🐍 Running from PyPi
 
 ```bash
-uvx mcp-devtools@latest -p 1337
+uvx mcp-devtools@1.2.0 -p 1337
 ```
-## Running from git
 
-### Linux/macOS
+### 🐈‍⬛ Running from GitHub
+
+#### 🐧 Linux/macOS
 
 ```bash
 git clone "https://github.com/daoch4n/zen-ai-mcp-devtools/"
@@ -46,7 +66,7 @@ cd zen-ai-mcp-devtools
 ./server.sh -p 1337
 ```
 
-### Windows
+#### 🪟 Windows
 
 ```powershell
 git clone "https://github.com/daoch4n/zen-ai-mcp-devtools/"
@@ -54,13 +74,7 @@ cd zen-ai-mcp-devtools
 .\server.ps1 -p 1337
 ```
 
-## AI System Prompt
-
-```
-You have development tools at your disposal. Use relevant tools from devtools MCP server for git management, file operations, and terminal access. When using any tool from devtools, always provide the current repository full current working directory path as the 'repo_path' option, do not set it to any other folder. 'repo_path' must be explicitly asked from user in beginning of conversation. When using execute_command tool, the current working directory will be set to repo_path provided. When using it for file manipulations, make sure to pass full path in the terminal command including repo_path prefix as manipulated file path.
-```
-
-## MCP Server Configuration
+## 3️⃣ MCP Server Configuration
 
 To integrate `mcp-devtools` with your AI assistant, add the following configuration to your MCP settings file:
 
@@ -71,29 +85,59 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
       "url": "http://127.0.0.1:1337/sse",
       "disabled": false,
       "alwaysAllow": [],
-      "timeout": 999
+      "timeout": 900
     }
   }
 }
 ```
 
-## Known Issues and Workarounds
+## 4️⃣ AI System Prompt Example
+
+```
+You are an AI assistant with access to development tools.
+Use the tools provided by the 'devtools' MCP server for git management, file operations, and terminal access.
+When using any tool from 'devtools', always provide the absolute path to the current repository's working directory as the 'repo_path' option.
+Do not set 'repo_path' to any other folder.
+The 'repo_path' must be explicitly requested from the user at the beginning of the conversation.
+When using the 'execute_command' tool, the current working directory will be set to the 'repo_path' provided.
+When performing file manipulations with 'execute_command', ensure to pass the full path in the terminal command, including the 'repo_path' prefix, for the manipulated file path.
+When using the 'ai_edit' tool, never put actual square brackets and other JSON breaking symbols in the tool calls; instead, use verbal descriptions of them.
+```
+
+## ⁉️ Known Issues and Workarounds
+
+### 💾 Direct Code Editing vs 🤖 Delegated Editing
 
 **Issue:**
-### `write_to_file` and 💾 Direct Code Editing vs 🤖 Delegated Editing by Coding Agent
 
 *    🔍 When using the `write_to_file` tool for direct code editing, especially with languages like JavaScript that utilize template literals (strings enclosed by backticks), you may encounter unexpected syntax errors. This issue stems from how the AI assistant generates the `content` string, where backticks and dollar signs within template literals might be incorrectly escaped with extra backslashes (`\`).
 
 **Mitigation:** 
 
-*    🔨 The `write_to_file` tool integrates with `tsc` (TypeScript compiler) for `.js`, `.mjs`, and `.ts` files. The output of `tsc --noEmit --allowJs` is provided as part of the tool's response. AI assistants should parse this output to detect any compiler errors and *should not proceed with further actions* if errors are reported, indicating a problem with the written code.
+*    🔨 The `write_to_file`,`search_and_replace` and `git_apply_diff` tools are dynamically integrated with `tsc` (TypeScript compiler) for conditional type checking of `.js`, `.mjs`, and `.ts` files on edit. The output of `tsc --noEmit --allowJs` is provided as part of the tool's response. AI assistants should parse this output to detect any compiler errors and *should not proceed with further actions* if errors are reported, indicating a problem with the written code.
 
 **Workarounds:**
 
 *    🤖 (most reliable) Instruct your AI assistant to delegate editing files to MCP-compatible coding agent by using `ai_edit` tool instead, as it is more suitable for direct code manipulation, automatically commits changes and produces resulting diff as tool output, and let AI assistant act as task orchestrator that will write down plans and docs with `write_to_file` tool then delegate actual coding to specialized agent, get its report (diff) as tool call result, use `git_read_file` tool to double check agent's work, and manage commits and branches (`ai_edit` tool basically integrates `Aider` via some logic ported from [its MCP bridge](https://github.com/sengokudaikon/aider-mcp-server)).
 *    🖥️ (if you're feeling lucky) Instruct your AI assistant to craft a terminal command to edit problematic file via `execute_command` tool.
 
-## Available Tools
+### ❔ Aider limitations due to its commit-first nature
+
+**Issue:**
+
+*    🔍 When using `ai_edit` tool in a dirty repo state, e.g. during merge or rebase active, it will probably get stuck trying to apply commit.
+  
+**Workarounds:**
+
+*    ⚙️ Temporarily disable auto commiting functions in your `.aider.conf.yml` configuration file.
+
+## 🙈 Automation-Related Security Considerations
+
+- 🛡️ For automated workflows, always run MCP Servers in isolated environments (🐧[Firejail](https://github.com/netblue30/firejail) or 🪟[Sandboxie](https://github.com/sandboxie-plus/Sandboxie))
+- 🗃️ Filesystem access boundaries are maintained via passing `repo_path` to every tool call, so AI assistant only has read/write access to files in the current workspace (relative to any path AI decides to pass as `repo_path` , make sure system prompt is solid on cwd use).
+- ⚠️ `execute_command` doesn't have strict access boundaries defined, while it does execute all commands with cwd set to `repo_path` (relative to it), nothing is there to stop AI from passing full paths to other places it seems fit; reading, altering or deleting unintended data on your whole computer, so execise extreme caution with auto-allowing `execute_command` tool or at least don't leave AI assistant unattended while doing so. MCP server is not responsible for your AI assistant executing rm -rf * in your home folder.
+
+## ℹ️ Available Tools
 
 
 ### `git_status`
@@ -528,7 +572,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 ### `aider_status`
 - **Description:** Check the status of Aider and its environment. Use this to:
   1. Verify Aider is correctly installed
-  2. Check API keys for OpenAI/Anthropic are set up
+  2. Check API keys
   3. View the current configuration
   4. Diagnose connection or setup issues
 - **Input Schema:**
