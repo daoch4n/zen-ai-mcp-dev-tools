@@ -19,7 +19,7 @@
 - 👩🏻‍💻 Use it to boost code editors like Cursor, Windsurf or VSCode extensions like Roo Code, Cline, Copilot or Augment with intuitive Git management and AI-assisted file editing capabilities and say goodbye to those pesky diff application failures wasting your time or `Roo having trouble...` breaking your carefully engineered automation workflows. Aider seems to get diffs right! (if it still doesn't work quite well, try to find perfect way for your AI model by explicitly passing different `edit_format` [parameters](#ai_edit) to `ai_edit` tool):
   - `unidiff` seems to work better with GPT
   - `diff-fenced`  performs best with Gemini
-  - `diff` provides balanced quick results on all models
+  - `diff` provides balanced quick results on all models (default)
   - `whole` is the slowest but most reliable option as it simply overwrites file
 
 ## 🦘 [Agentic-Driven Workflow](https://github.com/daoch4n/research/blob/main/agentic-driven-workflows.md) with Roo
