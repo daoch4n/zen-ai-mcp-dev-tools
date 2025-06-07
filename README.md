@@ -9,9 +9,9 @@
   -  🎋 Git management operations (`git_status`, `git_stage_and_commit`, `git_diff`, `git_diff_all`, `git_log`, `git_create_branch`, `git_reset` `git_checkout`, `git_show`)
   -  📁 Git file operations (`git_read_file`, `git_apply_diff`)
   -  📂 Direct file operations (`search_and_replace`, `write_to_file`)
-  -  🖥️ Terminal commands execution (`execute_command`), please review [Automation-Related Security Considerations](#-automation-related-security-considerations).
+  -  🖥️ Terminal commands execution (`execute_command`), please review [Automation-Related Security](#-automation-related-security-considerations).
   -  🤖 AI-assisted file operations using [Aider](https://github.com/Aider-AI/aider) (`ai_edit` (`aider_status` for systems ready check ))
-    <br> ℹ️ When using the `ai_edit` tool, please refer to the [Aider Configuration documentation](docs/aider_config.md) for detailed instructions.
+    <br> ℹ️ When using the `ai_edit` tool, please refer to the [Aider Configuration documentation](docs/aider_config.md).
 
 ## ⛎ Use Cases
 
