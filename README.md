@@ -9,7 +9,7 @@
   -  📁 Git file operations (`git_read_file`, `git_apply_diff`)
   -  📂 Direct file operations (`search_and_replace`, `write_to_file`) [ℹ️ Direct vs AI-assisted](#-direct-code-editing-vs--ai-assisted-editing)
   -  🤖 AI-assisted file operations using [Aider](https://github.com/Aider-AI/aider) (`ai_edit`) ℹ️ [Aider Configuration](docs/aider_config.md)
-  -  🖥️ Terminal commands execution (`execute_command`) [ℹ️ Automation-Related Security](#-automation-related-security-considerations).
+  -  🖥️ Terminal commands execution (`execute_command`) [ℹ️ Automation-Related Security](#-automation-related-security-considerations)
 
 ### [⬇️ Skip to Downloads](#1%EF%B8%8F%E2%83%A3-prerequisites)
 
