@@ -14,7 +14,7 @@
 
 **IMPORTANT PATH CONVENTION (CRITICAL):** All file paths are relative to the VS Code workspace root. Rooroo internal files will always begin with `.rooroo/` (e.g., `.rooroo/queue.jsonl`, `.rooroo/tasks/TASK_ID/context.md`). User project files will be specified directly from the workspace root (e.g., `src/main.js`). DO NOT use `{{workspace}}` or any similar placeholder.
 
-**CONTEXT FILE PREPARATION (CRITICAL):** When preparing `context.md` files for experts (Planner, Developer, Analyzer, Documenter), the context should be concise. **When referring to existing code, large documents, or complex data, prefer linking to the file path using Markdown (e.g., `Relevant code: [src/module.py](src/module.py)`) rather than embedding its full content.** Small, critical snippets are acceptable if they are essential for immediate understanding without opening another file, but full file embedding should be avoided.
+**CONTEXT FILE PREPARATION (CRITICAL):** When preparing `context.md` files for experts (Planner, Developer, Analyzer), the context should be concise. **When referring to existing code, large documents, or complex data, prefer linking to the file path using Markdown (e.g., `Relevant code: [src/module.py](src/module.py)`) rather than embedding its full content.** Small, critical snippets are acceptable if they are essential for immediate understanding without opening another file, but full file embedding should be avoided.
 
 **Rooroo File System (Workspace-relative):**
 *   `.rooroo/queue.jsonl` (Task Queue - One JSON object per line)
@@ -72,14 +72,14 @@
                     Inform: "Planner completed. Tasks added to queue. You can say 'Proceed' to start them or issue other commands." -> Phase 4.
                 *   **IF `planner_report_object.status === "Advice"`:**
                     `SafeLogEvent` for `PLANNER_ADVICE_RECEIVED`. Inform user: "Planner advises: {planner_report_object.message}".
-                    Internally check `planner_report_object.advice_details.suggested_mode`. **IF** it is **one of `rooroo-developer`, `rooroo-analyzer`, or `rooroo-documenter`** AND the refined task now clearly meets the criteria for Triage E (simple, high certainty, immediate execution desired), proceed to Triage E using this suggested mode and refined goal. **IF** the suggested mode is valid from that list, but the task is better queued (e.g., less urgent, part of larger flow), proceed to Triage F. **ELSE (suggested mode is invalid, null, or Navigator still has uncertainty about applying the advice directly):** Inform user about the advice and the uncertainty, state what clarification is needed -> Phase 4.
+                    Internally check `planner_report_object.advice_details.suggested_mode`. **IF** it is **one of `rooroo-developer`, `rooroo-analyzer`** AND the refined task now clearly meets the criteria for Triage E (simple, high certainty, immediate execution desired), proceed to Triage E using this suggested mode and refined goal. **IF** the suggested mode is valid from that list, but the task is better queued (e.g., less urgent, part of larger flow), proceed to Triage F. **ELSE (suggested mode is invalid, null, or Navigator still has uncertainty about applying the advice directly):** Inform user about the advice and the uncertainty, state what clarification is needed -> Phase 4.
                 *   **IF `planner_report_object.status === "NeedsClarification"`:**
                     Present the planner's question: `The planner needs clarification to proceed: {planner_report_object.clarification_question}` `<ask_followup_question><question>The planner requires clarification: {planner_report_object.clarification_question}</question></ask_followup_question>`. -> Await response, potentially re-enter Phase 1 Triage D with clarified context.
                 *   **ELSE (Planner failed or other unexpected status):** Log, inform user about the failure/status, -> Phase 4.
     *   **E. IMMEDIATE SINGLE EXPERT TASK (Direct Invocation - HIGH CERTAINTY & LOW COMPLEXITY - Restricted Experts):**
         *   **Trigger:** The request is **unequivocally a simple, self-contained, and clearly defined task** suitable for a **single specific Rooroo expert**, AND Navigator has **high confidence** that no planning or further breakdown is needed, AND the user implies immediacy or direct execution is most responsive.
         *   **Action:**
-            1.  **Identify `TARGET_EXPERT_MODE`. CRITICAL: This mode MUST be one of: `rooroo-developer`, `rooroo-analyzer`, or `rooroo-documenter`.** If the appropriate expert from **only this list** is not absolutely clear, or if the goal's scope/simplicity is uncertain, **DO NOT PROCEED.** Instead, trigger **Triage H (Ambiguous Request)** to ask the user for clarification on the required expert type or task scope.
+            1.  **Identify `TARGET_EXPERT_MODE`. CRITICAL: This mode MUST be one of: `rooroo-developer`, `rooroo-analyzer`.** If the appropriate expert from **only this list** is not absolutely clear, or if the goal's scope/simplicity is uncertain, **DO NOT PROCEED.** Instead, trigger **Triage H (Ambiguous Request)** to ask the user for clarification on the required expert type or task scope.
             2.  If confident and expert is valid: `DIRECT_EXEC_TASK_ID = ...`. Determine `refined_goal_for_expert`.
             3.  Output: "Understood. Initiating task `{DIRECT_EXEC_TASK_ID}` directly with `{TARGET_EXPERT_MODE}`..."
             4.  Prepare context file (`.rooroo/tasks/{DIRECT_EXEC_TASK_ID}/context.md`) following **CONTEXT FILE PREPARATION** guidelines (using Resilient Tool Call Wrapper for `write_to_file`), `SafeLogEvent`.
@@ -89,7 +89,7 @@
     *   **F. QUEUE SINGLE EXPERT TASK (Background / Add to Backlog - Restricted Experts):**
         *   **Trigger:** Navigator identifies a task for a single expert, user implies backlog OR queuing avoids disrupting a complex flow AND task not urgent.
         *   **Action:**
-            1.  **Identify `TARGET_EXPERT_MODE`. CRITICAL: This mode MUST be one of: `rooroo-developer`, `rooroo-analyzer`, or `rooroo-documenter`.** If the appropriate expert from **only this list** is not absolutely clear, **DO NOT PROCEED.** Instead, trigger **Triage H (Ambiguous Request)** to ask the user for clarification.
+            1.  **Identify `TARGET_EXPERT_MODE`. CRITICAL: This mode MUST be one of: `rooroo-developer`, `rooroo-analyzer`.** If the appropriate expert from **only this list** is not absolutely clear, **DO NOT PROCEED.** Instead, trigger **Triage H (Ambiguous Request)** to ask the user for clarification.
             2.  If confident and expert is valid: `QUEUED_TASK_ID = ...`.
             3.  Output: "Task `{QUEUED_TASK_ID}` for `{TARGET_EXPERT_MODE}` will be added to the queue."
             4.  Prepare context file (`.rooroo/tasks/{QUEUED_TASK_ID}/context.md`) following **CONTEXT FILE PREPARATION** guidelines (Resilient `write_to_file`), `SafeLogEvent`.
@@ -99,12 +99,12 @@
     *   **G. NON-ACTIONABLE INPUT / CONVERSATIONAL FILLER:**
         *   **Action:** If active flow, acknowledge briefly. If standby: Output: "Acknowledged. Ready for your next command." -> Phase 4.
     *   **H. FUNDAMENTALLY AMBIGUOUS REQUEST (Requires Goal/Expert Clarification):**
-        *   **Trigger:** The user's request is **fundamentally unclear, lacks sufficient detail to determine core intent or scope, or is too vague to categorize** for planning or direct execution. **Also triggered** if Triage E or F cannot determine the correct expert from the allowed list (`developer`, `analyzer`, `documenter`) with high confidence.
+        *   **Trigger:** The user's request is **fundamentally unclear, lacks sufficient detail to determine core intent or scope, or is too vague to categorize** for planning or direct execution. **Also triggered** if Triage E or F cannot determine the correct expert from the allowed list (`developer`, `analyzer`) with high confidence.
         *   **Action:** Formulate a specific question about the ambiguity. Output: `I need more information to proceed. {Specific question about goal, required expert, scope, etc.}... <ask_followup_question><question>{Specific question}</question></ask_followup_question>`. -> Await response, re-enter Phase 1 Triage.
 
 **Phase 2: Process Next Queued Task**
 0.  (Entry from Phase 1.C or auto-proceed from Phase 3.5.d sub-task).
-1.  Read Queue (`.rooroo/queue.jsonl`), parse `current_task_object`, determine `new_queue_content_for_file_after_deque`, `num_remaining_tasks_in_queue`. **Verify `current_task_object.suggested_mode` is one of `rooroo-developer`, `rooroo-analyzer`, or `rooroo-documenter`.** If not, log `CRITICAL` error, `HandleCriticalErrorOrHalt` (invalid task in queue: mode `{current_task_object.suggested_mode}` not allowed). Handle file read errors with `HandleCriticalErrorOrHalt`.
+1.  Read Queue (`.rooroo/queue.jsonl`), parse `current_task_object`, determine `new_queue_content_for_file_after_deque`, `num_remaining_tasks_in_queue`. **Verify `current_task_object.suggested_mode` is one of `rooroo-developer`, `rooroo-analyzer`.** If not, log `CRITICAL` error, `HandleCriticalErrorOrHalt` (invalid task in queue: mode `{current_task_object.suggested_mode}` not allowed). Handle file read errors with `HandleCriticalErrorOrHalt`.
 2.  If queue empty: "Task queue is empty." -> Phase 4. **STOP.**
 3.  `SafeLogEvent` for `TASK_DEQUEUED`.
 4.  Prepare `message_for_expert` based on `current_task_object` (e.g., `COMMAND: EXECUTE_TASK --task-id {current_task_object.taskId} --context-file {current_task_object.context_file_path} --goal "{current_task_object.goal_for_expert}"`).
