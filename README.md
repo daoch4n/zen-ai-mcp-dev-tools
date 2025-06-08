@@ -13,7 +13,7 @@
   -  🤖 AI-assisted file operations using [Aider](https://github.com/Aider-AI/aider) (`ai_edit` (`aider_status` for systems ready check ))
     <br> ℹ️ When using the `ai_edit` tool, please refer to the [Aider Configuration documentation](docs/aider_config.md).
 
-## [⬇️ Installation](#1%EF%B8%8F%E2%83%A3-prerequisites)
+### [⬇️ Skip to Downloads](#1%EF%B8%8F%E2%83%A3-prerequisites)
 
 ## ⛎ Use Cases
 
