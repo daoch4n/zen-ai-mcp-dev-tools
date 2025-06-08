@@ -8,10 +8,10 @@
 - 📄 For detailed overview of all tools, their arguments, and descriptions, please refer to [Available Tools](#%E2%84%B9%EF%B8%8F-available-tools).
   -  🎋 Git management operations (`git_status`, `git_stage_and_commit`, `git_diff`, `git_diff_all`, `git_log`, `git_create_branch`, `git_reset` `git_checkout`, `git_show`)
   -  📁 Git file operations (`git_read_file`, `git_apply_diff`)
-  -  📂 Direct file operations (`search_and_replace`, `write_to_file`)
-  -  🖥️ Terminal commands execution (`execute_command`), please review [Automation-Related Security](#-automation-related-security-considerations).
+  -  📂 Direct file operations (`search_and_replace`, `write_to_file`) [Direct vs AI-assisted]#-direct-code-editing-vs--delegated-editing
   -  🤖 AI-assisted file operations using [Aider](https://github.com/Aider-AI/aider) (`ai_edit` (`aider_status` for systems ready check ))
     <br> ℹ️ When using the `ai_edit` tool, please refer to the [Aider Configuration documentation](docs/aider_config.md).
+  -  🖥️ Terminal commands execution (`execute_command`), please review [Automation-Related Security](#-automation-related-security-considerations).
 
 ### [⬇️ Skip to Downloads](#1%EF%B8%8F%E2%83%A3-prerequisites)
 
@@ -126,7 +126,7 @@ When using the 'ai_edit' tool, never put actual square brackets and other JSON b
 
 ## ⁉️ Known Issues and Workarounds
 
-### 💾 Direct Code Editing vs 🤖 Delegated Editing
+### 💾 Direct Code Editing vs 🤖 AI-assisted Editing
 
 **Issue:**
 
