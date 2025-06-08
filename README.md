@@ -13,6 +13,8 @@
   -  🤖 AI-assisted file operations using [Aider](https://github.com/Aider-AI/aider) (`ai_edit` (`aider_status` for systems ready check ))
     <br> ℹ️ When using the `ai_edit` tool, please refer to the [Aider Configuration documentation](docs/aider_config.md).
 
+## [⬇️ Installation](#1%EF%B8%8F%E2%83%A3-prerequisites)
+
 ## ⛎ Use Cases
 
 - 🌐 Use it to extend online chat-based assistants such as ChatGPT, Google Gemini or AI Studio, Perplexity, Grok, OpenRouter Chat, DeepSeek, Kagi, T3 Chat with direct access to local files, git, terminal commands execution and AI-assisted file editing capabilities via [MCP-SuperAssistant](https://github.com/srbhptl39/MCP-SuperAssistant/) or similar projects.
