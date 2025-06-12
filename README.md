@@ -22,7 +22,7 @@
   - `diff` provides balanced quick results on all models (default)
   - `whole` is the slowest but most reliable option as it simply overwrites file
 
-## 🦘 [Agentic-Driven Workflow](https://github.com/daoch4n/research/blob/main/agentic-driven-workflows.md) with Roo
+## 🦘 [Agentic-Driven Workflows](https://github.com/daoch4n/research/tree/main/agentic-driven-workflows) with Roo
 
 https://github.com/user-attachments/assets/4d218e5e-906c-4d24-abc3-09ab0acdc1d0
 
