@@ -8,8 +8,8 @@
   -  🎋 Git management operations (`git_status`, `git_stage_and_commit`, `git_diff`, `git_diff_all`, `git_log`, `git_create_branch`, `git_reset` `git_checkout`, `git_show`)
   -  📁 Git file operations (`git_read_file`, `git_apply_diff`)
   -  📂 Direct file operations (`search_and_replace`, `write_to_file`) [ℹ️ Direct vs AI-assisted](#-direct-code-editing-vs--ai-assisted-editing)
-  -  🤖 AI-assisted file operations using [Aider](https://github.com/Aider-AI/aider) (`ai_edit`) ℹ️ [Aider Configuration](docs/aider_config.md)
-  -  🖥️ Terminal commands execution (`execute_command`) [ℹ️ Automation-Related Security](#-automation-related-security-considerations)
+  -  🤖 AI-assisted file operations using [Aider](https://github.com/Aider-AI/aider) (`ai_edit`) [ℹ️ Aider Configuration](docs/aider_config.md)
+  -  🖥️ Terminal commands execution (`execute_command`) [⚠️ Automation-Related Security](#-automation-related-security-considerations)
 
 https://github.com/user-attachments/assets/05670a7a-72c5-4276-925c-dbd1ed617d99
 
