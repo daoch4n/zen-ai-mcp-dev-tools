@@ -11,6 +11,8 @@
   -  🤖 AI-assisted file operations using [Aider](https://github.com/Aider-AI/aider) (`ai_edit`) ℹ️ [Aider Configuration](docs/aider_config.md)
   -  🖥️ Terminal commands execution (`execute_command`) [ℹ️ Automation-Related Security](#-automation-related-security-considerations)
 
+https://github.com/user-attachments/assets/05670a7a-72c5-4276-925c-dbd1ed617d99
+
 ### [⬇️ Skip to Downloads](#1%EF%B8%8F%E2%83%A3-prerequisites)
 
 ## ⛎ Use Cases
