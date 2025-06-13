@@ -109,7 +109,7 @@ To integrate `mcp-devtools` with your AI assistant, add the following configurat
 }
 ```
 
-## 4️⃣ [AI System Prompt](https://github.com/daoch4n/research/tree/main/prompt-engineering) Example
+## 4️⃣ [AI System Prompt](https://github.com/daoch4n/research/tree/ai/prompt-engineering/google-whitepaper) Example
 
 ```
 You are an AI assistant with access to development tools.
